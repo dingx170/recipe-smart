@@ -32,4 +32,4 @@ jobs:
         app-name: 'recipesmart'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b23b5fbf88db479585484db7eafa8dbf }}
-        package: .
+        package: ./server
