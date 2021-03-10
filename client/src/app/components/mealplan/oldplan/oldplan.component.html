@@ -1,0 +1,33 @@
+<br>
+    <table class="tab table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Creation Date/Time</th>
+                <th scope="col">Budget</th>
+                <th scope="col">Group</th>
+                <th scope="col">Recipe List</th>
+                <th scope="col">Shopping List</th>
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let item of mealplans; let key=index;">
+            <tr>
+                <th scope="row">{{ key + 1 }}</th>
+                <td>{{ item.date | date:'medium'}}</td>
+                <td>{{ item.budget }}</td>
+                <td>{{ item.group }}</td>
+                <td>
+                    <button class="btn btn-lg submit-btn">
+                        <a class="nav-link" [routerLink]="['.', item.mealplan_id, 'recipelist']">Check</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-lg submit-btn">
+                        <a class="nav-link" [routerLink]="['.', item.mealplan_id, 'shoppinglist']">Check</a>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>

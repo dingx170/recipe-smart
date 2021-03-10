@@ -1,0 +1,81 @@
+<div class="row">
+     <!-- Left side Ads -->
+     <div class="col-2 align-center">
+        <app-ads></app-ads>
+    </div>
+
+    <div class="col-8">
+
+        <br><br>
+
+         <!-- Filters -->
+        <div class="row">
+
+            <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn filterbtn" id="dropdownBasic1" ngbDropdownToggle>Meal Type</button>
+                    <select ngbDropdownMenu name="mealType" id="mealType" [(ngModel)]="filter.meal_types" class="form-control" multiple="multiple">
+                        <option value="{{mealType}}" *ngFor="let mealType of mealTypes">{{mealType}}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn filterbtn" id="dropdownBasic1" ngbDropdownToggle>Cuisine</button>
+                    <select ngbDropdownMenu name="cuisineType" id="cuisineType" [(ngModel)]="filter.cuisine_types" class="form-control" multiple="multiple">
+                        <option value="{{cuisineType}}" *ngFor="let cuisineType of cuisineTypes">{{cuisineType}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn filterbtn" id="dropdownBasic1" ngbDropdownToggle>Feature</button>
+                    <select ngbDropdownMenu name="featureType" id="featureType" [(ngModel)]="filter.feature_types" class="form-control" multiple="multiple">
+                        <option value="{{featureType}}" *ngFor="let featureType of featureTypes">{{featureType}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn filterbtn" id="dropdownBasic1" ngbDropdownToggle>Budget &lt; $</button>
+                    <select ngbDropdownMenu name="budget" id="budget" [(ngModel)]="filter.cost" class="form-control">
+                        <option value="{{budget}}" *ngFor="let budget of budgets">{{budget}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <input type="text" name="name" id="name" [(ngModel)]="filter.name" class="filter-input form-control" placeholder="Search by name">
+            </div>
+
+            <div class="col">
+                <button type="submit" class="btn filterbtn" (click)="filterRecipes(filter)" title="filter recipes">Show</button>
+            </div>
+
+        </div>
+
+        <br><hr><br>
+
+        <!-- Contents -->
+        <div class="container-fluid bg-3 text-center">              
+            <div class="row picrow">
+                <div class="col-4" *ngFor="let item of recipes">
+                    <a [routerLink]="['.', item.recipe_id]">
+                        <img src="{{item.photo}}" class="img-responsive recipe-pic" alt="Image">
+                    </a>
+                    <p class="recipe-name">{{ item.name }}</p>
+                </div>
+            </div>           
+        </div>
+
+    </div>
+
+     <!-- Right side Ads -->
+     <div class="col-2 align-center">
+        <app-ads></app-ads>
+    </div>
+</div>
+

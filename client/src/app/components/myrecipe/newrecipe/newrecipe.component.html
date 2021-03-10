@@ -1,0 +1,152 @@
+<div class="row">
+
+    <div class="col-1"></div>
+
+    <div class="col-11">
+
+        <br>
+        <h1 class="page-text" *ngIf="!isUpdate">Create new recipe</h1>
+        <h1 class="page-text" *ngIf="isUpdate">Update my recipe</h1>
+        <hr><br>
+
+        <form>
+
+            <div class="row">
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="mealType" class="filter-label">Meal Type</label>
+                        <select name="mealType" id="mealType" [(ngModel)]="recipe.meal_type" class="form-control">
+                          <option value="{{mealType}}" *ngFor="let mealType of mealTypes">{{mealType}}</option>
+                        </select>
+                    </div>    
+                </div>   
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="cuisineType" class="filter-label">Cuisine Type</label>
+                        <select name="cuisineType" id="cuisineType" [(ngModel)]="recipe.cuisine_type" class="form-control" >
+                            <option value="{{cuisineType}}" *ngFor="let cuisineType of cuisineTypes">{{cuisineType}}</option>
+                        </select>
+                    </div>
+                </div>   
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="featureType" class="filter-label">Feature Type</label>
+                        <select name="featureType" id="featureType" [(ngModel)]="recipe.feature_type" class="form-control" >
+                            <option value="{{featureType}}" *ngFor="let featureType of featureTypes">{{featureType}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="budget" class="filter-label">Budget &lt; $</label>
+                        <select name="budget" id="budget" [(ngModel)]="recipe.cost" class="form-control" >
+                            <option value="{{budget}}" *ngFor="let budget of budgets">${{budget}}</option>
+                        </select>
+                    </div>
+                </div>   
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="groupSize" class="filter-label">Group size</label>
+                        <select name="groupSize" id="groupSize" [(ngModel)]="recipe.group" class="form-control" >
+                            <option value="{{groupSize}}" *ngFor="let groupSize of groupSizes">{{groupSize}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="allergies" class="filter-label">Allergies</label>
+                        <select name="allergies" id="allergies" [(ngModel)]="recipe.restrictions" class="form-control" multiple="multiple">
+                          <option value="{{allergy}}" *ngFor="let allergy of allergies">{{allergy}}</option>
+                        </select>
+                    </div>    
+                </div>  
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="subtitle-text">Recipe Name</label>
+                <input type="text" name="name" id="name" [(ngModel)]="recipe.name" class="form-control" required>
+            </div>
+  
+            <label for="steps" class="subtitle-text">Cooking Steps</label>
+            <section class="container" *ngFor="let step of recipe.steps; let i = index;">
+                <div class="row">
+                    <div class="col-2">
+                        <h4>Step {{i + 1}}</h4>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [(ngModel)]="step.step" name="step_{{i + 1}}"/>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn btn-danger" (click)="removeStep(i)">Remove</button>
+                    </div>
+                </div>
+            </section>
+            <button type="button" class="btn btn-block" (click)="addStep()">Add step</button>
+  
+            <br>
+
+            <label for="ingredients" class="subtitle-text">Cooking Ingredients</label>
+            <section class="container" *ngFor="let item of recipe.ingredients; let i = index;">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col"><h5>Name</h5></div>
+                    <div class="col-2"><h5>Quantity</h5></div>
+                    <div class="col-2"><h5>Unit</h5></div>
+                    <div class="col-1"></div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <h4>Item {{i + 1}}</h4>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [(ngModel)]="item.name" name="name_{{i + 1}}" />
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [(ngModel)]="item.count" name="count_{{i + 1}}" />
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [(ngModel)]="item.unit" name="unit_{{i + 1}}" />
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <button type="button" class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+                    </div>
+                </div>
+            </section>
+            <button type="button" class="btn btn-block" (click)="addItem()">Add ingredient</button>
+
+            <h1 class="subtitle-text">Add image</h1>
+            <input #file type="file" accept='image/*' (change)="preview(file.files); oneFileChanged($event)" />
+            <br><br>
+            <div class="row pic-row">
+                <div class="col">
+                    <img [src]="imgURL" class="pic-holder" *ngIf="imgURL">
+                </div>
+            </div>
+          
+            <br><hr>
+
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" *ngIf="!isUpdate" class="btn btn-lg submit-btn submit-center" (click)="createRecipe()" title="submit new recipe">Submit</button>
+                    <button type="submit" *ngIf="isUpdate" class="btn btn-lg submit-btn submit-center" (click)="updateRecipe()" title="submit new recipe">Update</button>
+                </div>          
+            </div>
+
+          </form>
+
+          <hr>
+          <!-- <p>
+            Current info：{{recipe | json}}
+          </p> -->
+
+    </div>
+          
+</div>

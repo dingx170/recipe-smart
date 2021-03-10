@@ -1,0 +1,101 @@
+.page-text{
+    padding-top: 20px;
+    font-size: 50px;
+    color: #f58f8fff;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.filter-btn {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f6cd4cff; 
+    color: white;
+}
+
+.filter-label {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f6cd4cff; 
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form-check-label{
+    font-size: 16px;
+}
+
+.submit-btn {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f58f8fff; 
+    border: 1px solid #f58f8fff;
+    color: white;
+}
+
+.subtitle-text {
+    padding-top: 20px;
+    font-size: 35px;
+    color: #f58f8fff;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.submit-text{
+    font-family: cursive;
+    font-size: 30px;
+    color: #f58f8fff;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.lightning-deal-content .product-list-item .fancy-number-group .btn-up::after, .product-swiper-list .fancy-number-group.fancy-number-group-sm .btn-up:before {
+    content: '\f067';
+}
+
+.recipe-pic {
+    height: 220px;
+    width: 270px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.submit-center {
+    display: block;
+    margin: 0 auto;
+    width:200px;
+}
+.readonly-input{
+    width:100px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.btn-block{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgb(238, 182, 182); 
+    color: white;
+}
+.count-btn{
+    font-size: 20px;
+    font-weight: bold;
+    height: calc(1.5em + .75rem + 2px);
+    line-height: 1.5;
+    border-radius: .25rem;
+    background-color: #f58f8fff; 
+    border: 1px solid #f58f8fff;
+    color: white;
+    width:50px;
+}

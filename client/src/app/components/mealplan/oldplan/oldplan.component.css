@@ -1,0 +1,12 @@
+.tab{
+    color: #f58f8fff;
+    font-size: 30px;
+}
+
+.submit-btn {  
+    font-size: 20px;
+    font-weight: bold;
+    background-color:  #f6cd4cff; 
+    color: white;
+    width: 200px;
+}

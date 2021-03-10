@@ -1,0 +1,80 @@
+.page-text {
+    padding-top: 20px;
+    font-size: 50px;
+    color: #f58f8fff;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.subtitle-text {
+    padding-top: 20px;
+    font-size: 35px;
+    color: #f58f8fff;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.filter-btn {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f6cd4cff; 
+    color: white;
+}
+
+.filter-label {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f6cd4cff; 
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form-check-label{
+    font-size: 16px;
+}
+
+.submit-btn {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f58f8fff; 
+    border: 1px solid #f58f8fff;
+    color: white;
+}
+
+.submit-text{
+    font-family: cursive;
+    font-size: 30px;
+    color: #f58f8fff;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.btn-block{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #f58f8fff; 
+    border: 1px solid #f58f8fff;
+    color: white;
+}
+
+.pic-row {
+    min-height: 400px;
+}
+
+.pic-bg {
+    background-color: rgb(226, 222, 222);
+}
+
+.pic-holder {
+    height: 400px;
+    /* width: 100%; */
+}
+
+.submit-center {
+    display: block;
+    margin: 0 auto;
+    width:200px;
+}

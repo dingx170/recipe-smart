@@ -1,0 +1,30 @@
+.left {
+    border-right: 1px solid #f6cd4cff; 
+}
+
+.right {
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.left-btn {
+    font-size: 25px;
+    font-weight: bold;
+    background-color: #f6cd4cff;
+    color: white;
+    border: 6px solid white;
+}
+
+.content-header {
+    margin-top: 25px;
+    background-image: linear-gradient(to right, #f6cd4cff, rgb(247, 241, 223));
+}
+
+.bar-text{
+    font-size: 60px;
+    
+    color:white;
+    font-weight: bold;
+    font-family: cursive;
+}
