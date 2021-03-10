@@ -10,7 +10,7 @@ import { ShareDataService } from './share-data.service';
   providedIn: 'root'
 })
 export class MealplanService {
-  hostUrl: string = 'http://localhost:8080/';
+  hostUrl: string = "/"; //'http://localhost:8080/';
   userId: string;
 
   constructor(public http:HttpClient, public shareDataService: ShareDataService) { }

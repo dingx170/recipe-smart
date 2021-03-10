@@ -12,7 +12,7 @@ import { ShareDataService } from './share-data.service';
 })
 export class LoginService {
 
-  private base_api:string = "http://localhost:8080";
+  private base_api:string = "/"; //"http://localhost:8080";
 
   isLoggedIn: boolean;
 
