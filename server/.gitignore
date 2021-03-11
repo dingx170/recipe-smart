@@ -1,6 +1,0 @@
-/node_modules
-/out
-/
-out/DataAccess.js
-db/*
-/sessions
