@@ -1,5 +1,5 @@
 {
-  "name": "recipe-smart-server",
+  "name": "recipe-smart",
   "version": "1.0.0",
   "description": "",
   "main": "out/AppServer.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dingx170/recipe-smart-server.git"
+    "url": "git+https://github.com/dingx170/recipe-smart.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dingx170/recipe-smart-server/issues"
+    "url": "https://github.com/dingx170/recipe-smart/issues"
   },
-  "homepage": "https://github.com/dingx170/recipe-smart-server#readme",
+  "homepage": "https://github.com/dingx170/recipe-smart#readme",
   "dependencies": {
     "chai": "^4.3.3",
     "chai-http": "^4.3.0",
