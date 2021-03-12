@@ -1,16 +1,10 @@
-import express, {Application, Request, Response} from "express";
+import express, { Application } from "express";
 import * as bodyParser from 'body-parser';
-import {RecipeRoute} from './Routes/RecipeRoute';
-// import {myRecipesRoute} from './Routes/MyRecipes';
-import {UserRoute} from "./Routes/UserRoute";
-import {MealplanRoute} from "./Routes/MealplanRoute"
-import { RecipeModel } from "./Models/RecipeModel";
-import { MyRecipeRoute } from "./Routes/MyRecipeRoute";
-
 import cors from "cors";
-import ejs from "ejs";
-import multer from "multer";
-import path from "path";
+import { RecipeRoute } from './Routes/RecipeRoute';
+import { UserRoute } from "./Routes/UserRoute";
+import { MealplanRoute } from "./Routes/MealplanRoute"
+import { MyRecipeRoute } from "./Routes/MyRecipeRoute";
 
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
@@ -23,15 +17,13 @@ class App {
     constructor() {
         this.expApp = express();
         this.setupMiddleware();
+        this.setupFrontEnd();
         this.setupRoutes();
     }
 
     // config middleware
     private setupMiddleware(): void {
         this.expApp.use(bodyParser.json({ limit: '50mb' }));
-        
-        // TO-USE-LATER
-        // this.express.use(logger('dev'));
         this.expApp.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
         this.expApp.use(session({
             name: 'skey',
@@ -47,9 +39,13 @@ class App {
         this.expApp.use(cors());
     }
 
+    // config front end 
+    private setupFrontEnd(): void {
+        this.expApp.use('/', express.static(__dirname + '/dist/recipe-smart-client'));
+    }
+
     // config API endpoints
     private setupRoutes(): void {
-        this.expApp.use('/', express.static(__dirname + '/dist/recipe-smart-client'));
         let router =  express.Router();
 
         // 1. register routes
@@ -57,20 +53,6 @@ class App {
         MyRecipeRoute.registerRoutes(router);
         UserRoute.registerRoutes(router);
         MealplanRoute.registerMealplanRoutes(router);
-        // TO-USE-LATER
-
-        // this.expApp.use('/images', express.static(__dirname+'/img'));
-        // this.expApp.use('/', express.static(__dirname+'/pages'));
-        // this.expApp.use("/users", UserRoute);
-        
-        // EJS 
-        
-        // this.expApp.set('view engine', 'ejs');
-
-        
-
-        //TempPageRoute.registerRoutes(router);
-        
 
         this.expApp.use('/', router);
         
