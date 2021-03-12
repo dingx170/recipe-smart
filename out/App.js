@@ -25,26 +25,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const bodyParser = __importStar(require("body-parser"));
+const cors_1 = __importDefault(require("cors")); // TO-DO try delete
+const passport_1 = __importDefault(require("passport"));
+const GooglePassport_1 = __importDefault(require("./Passport/GooglePassport"));
 const RecipeRoute_1 = require("./Routes/RecipeRoute");
-// import {myRecipesRoute} from './Routes/MyRecipes';
 const UserRoute_1 = require("./Routes/UserRoute");
 const MealplanRoute_1 = require("./Routes/MealplanRoute");
 const MyRecipeRoute_1 = require("./Routes/MyRecipeRoute");
-const cors_1 = __importDefault(require("cors"));
+const Passport_1 = require("./Passport/Passport");
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 class App {
     // run config methods
     constructor() {
+        this.googlePassportObj = new GooglePassport_1.default();
         this.expApp = express_1.default();
         this.setupMiddleware();
+        this.setupFrontEnd();
         this.setupRoutes();
     }
     // config middleware
     setupMiddleware() {
         this.expApp.use(bodyParser.json({ limit: '50mb' }));
-        // TO-USE-LATER
-        // this.express.use(logger('dev'));
         this.expApp.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
         this.expApp.use(session({
             name: 'skey',
@@ -56,25 +58,28 @@ class App {
                 maxAge: 10 * 1000 // expiration time in mili
             }
         }));
+        // this.expApp.use(cookieParser());
+        this.expApp.use(passport_1.default.initialize());
+        this.expApp.use(passport_1.default.session());
         this.expApp.use(cors_1.default());
+    }
+    // config front end 
+    setupFrontEnd() {
+        this.expApp.use('/', express_1.default.static(__dirname + '/dist/recipe-smart-client'));
     }
     // config API endpoints
     setupRoutes() {
-        this.expApp.use('/', express_1.default.static(__dirname + '/dist/recipe-smart-client'));
         let router = express_1.default.Router();
         // 1. register routes
         RecipeRoute_1.RecipeRoute.registerRoutes(router);
         MyRecipeRoute_1.MyRecipeRoute.registerRoutes(router);
         UserRoute_1.UserRoute.registerRoutes(router);
         MealplanRoute_1.MealplanRoute.registerMealplanRoutes(router);
-        // TO-USE-LATER
-        // this.expApp.use('/images', express.static(__dirname+'/img'));
-        // this.expApp.use('/', express.static(__dirname+'/pages'));
-        // this.expApp.use("/users", UserRoute);
-        // EJS 
-        // this.expApp.set('view engine', 'ejs');
-        //TempPageRoute.registerRoutes(router);
+        Passport_1.Passport.registerRoutes(router);
         this.expApp.use('/', router);
+        router.get('/test', Passport_1.Passport.validateAuth, (req, res) => {
+            console.log('DONE auth');
+        });
     }
 }
 exports.App = App;

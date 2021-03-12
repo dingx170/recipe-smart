@@ -31,6 +31,7 @@
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20-with-people-api": "^2.0.0",
     "session-file-store": "^1.5.0"
   },
   "devDependencies": {
