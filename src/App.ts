@@ -1,17 +1,23 @@
 import express, { Application } from "express";
 import * as bodyParser from 'body-parser';
-import cors from "cors";
+import cors from "cors"; // TO-DO try delete
+import * as cookieParser from 'cookie-parser';
+import * as passport from 'passport';
+import GooglePassportObj from './Passport/GooglePassport';
 import { RecipeRoute } from './Routes/RecipeRoute';
 import { UserRoute } from "./Routes/UserRoute";
 import { MealplanRoute } from "./Routes/MealplanRoute"
 import { MyRecipeRoute } from "./Routes/MyRecipeRoute";
+import { Passport } from "./Passport/Passport";
 
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
+
 class App {
 
     public expApp: Application;
+    public googlePassportObj: GooglePassportObj;
 
     // run config methods
     constructor() {
@@ -19,6 +25,7 @@ class App {
         this.setupMiddleware();
         this.setupFrontEnd();
         this.setupRoutes();
+        this.googlePassportObj = new GooglePassportObj();
     }
 
     // config middleware
@@ -35,6 +42,10 @@ class App {
                 maxAge: 10 * 1000  // expiration time in mili
             }
         }));
+
+        this.expApp.use(cookieParser());
+        this.expApp.use(passport.initialize());
+        this.expApp.use(passport.session());
 
         this.expApp.use(cors());
     }
@@ -53,6 +64,8 @@ class App {
         MyRecipeRoute.registerRoutes(router);
         UserRoute.registerRoutes(router);
         MealplanRoute.registerMealplanRoutes(router);
+
+        Passport.registerRoutes(router);
 
         this.expApp.use('/', router);
         
