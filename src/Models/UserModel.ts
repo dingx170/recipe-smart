@@ -50,6 +50,10 @@ class UserModel {
   public createModel(): void {
     this.model = mongooseConnection.model<IUserModel>("User", this.schema);
   }
+  
+  public getModel(): any {
+    return this.model;
+  }
 
   /**
    * Retrieve user by id and return structured data to requesting end

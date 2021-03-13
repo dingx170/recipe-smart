@@ -33,7 +33,7 @@ class GooglePassport {
 
                     console.log("+++++++++++++++++++");
 
-                    let userModel = UserController.userModel;
+                    let userModel = UserController.userModel.getModel();
 
                     userModel.findOne({
                         ssoId: profile.id
