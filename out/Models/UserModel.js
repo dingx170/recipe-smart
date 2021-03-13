@@ -119,7 +119,7 @@ class UserModel {
     findUserBySsoID(ssoId, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(ssoId);
-            return yield this.model.findOne({ ssoId: ssoId });
+            return yield this.model.exists({ ssoId: ssoId });
         });
     }
     /**

@@ -24,7 +24,7 @@ class GooglePassport {
             },
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
-                process.nextTick( () => {
+                process.nextTick( async () => {
                     console.log("==============================================");
                     console.log('validating google profile:' + JSON.stringify(profile));
                     console.log("userId:" + profile.id);
@@ -35,40 +35,40 @@ class GooglePassport {
 
                     let userModel = UserController.userModel.getModel();
 
-                    userModel.findOne({
-                        ssoId: profile.id
-                    }).then((userRecord, err) => {
-                        if (userRecord) {
-                            done(null, userRecord);
-                        } else {
-                            const newUser = new userModel({
-                                ssoId: profile.id,
-                                name: profile.displayName
-                            });
-                            newUser.save().then((newUser) => {
-                                done(null, newUser);
-                            })
-                        }
-                    }).catch(err => {
-                        console.log(err);
-                    });
-
-                    // let user :any = await UserController.userModel.findUserBySsoID(profile.id);
-                    // console.log(user.name);
-
-                    // if (user) {
-                    //     console.log("existing user");
-                    //     done(null, user);
-                    // } else {
-                    //     console.log("create user");
-                    //     let newUser : any = {
-                    //         name : profile.displayName,
-                    //         ssoId : profile.id
+                    // userModel.findOne({
+                    //     ssoId: profile.id
+                    // }).then((userRecord, err) => {
+                    //     if (userRecord) {
+                    //         done(null, userRecord);
+                    //     } else {
+                    //         const newUser = new userModel({
+                    //             ssoId: profile.id,
+                    //             name: profile.displayName
+                    //         });
+                    //         newUser.save().then((newUser) => {
+                    //             done(null, newUser);
+                    //         })
                     //     }
-                    //     UserController.userModel.createUser(newUser, (res) => {
-                    //         console.log(res);
-                    //     });
-                    // }
+                    // }).catch(err => {
+                    //     console.log(err);
+                    // });
+
+                    let user :any = await UserController.userModel.findUserBySsoID(profile.id);
+                    console.log(user);
+
+                    if (user) {
+                        console.log("existing user");
+                        done(null, user);
+                    } else {
+                        console.log("create user");
+                        let newUser : any = {
+                            name : profile.displayName,
+                            ssoId : profile.id
+                        }
+                        UserController.userModel.createUser(newUser, (res) => {
+                            console.log(res);
+                        });
+                    }
                     console.log("+++++++++++++++++++");
                     console.log("==============================================");
                     // this.email = profile.emails[0].value;

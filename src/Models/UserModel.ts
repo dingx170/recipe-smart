@@ -132,7 +132,7 @@ class UserModel {
 
   public async findUserBySsoID(ssoId: String, res: any){
     console.log(ssoId);
-    return await this.model.findOne({ssoId: ssoId});
+    return await this.model.exists({ssoId: ssoId});
   }
 
   /**

@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -19,7 +28,7 @@ class GooglePassport {
             //                profileFields: ['id', 'displayName', 'emails']
         }, (accessToken, refreshToken, profile, done) => {
             console.log("inside new password google strategy");
-            process.nextTick(() => {
+            process.nextTick(() => __awaiter(this, void 0, void 0, function* () {
                 console.log("==============================================");
                 console.log('validating google profile:' + JSON.stringify(profile));
                 console.log("userId:" + profile.id);
@@ -27,44 +36,44 @@ class GooglePassport {
                 console.log("retrieve all of the profile info needed");
                 console.log("+++++++++++++++++++");
                 let userModel = UserController_1.UserController.userModel.getModel();
-                userModel.findOne({
-                    ssoId: profile.id
-                }).then((userRecord, err) => {
-                    if (userRecord) {
-                        done(null, userRecord);
-                    }
-                    else {
-                        const newUser = new userModel({
-                            ssoId: profile.id,
-                            name: profile.displayName
-                        });
-                        newUser.save().then((newUser) => {
-                            done(null, newUser);
-                        });
-                    }
-                }).catch(err => {
-                    console.log(err);
-                });
-                // let user :any = await UserController.userModel.findUserBySsoID(profile.id);
-                // console.log(user.name);
-                // if (user) {
-                //     console.log("existing user");
-                //     done(null, user);
-                // } else {
-                //     console.log("create user");
-                //     let newUser : any = {
-                //         name : profile.displayName,
-                //         ssoId : profile.id
+                // userModel.findOne({
+                //     ssoId: profile.id
+                // }).then((userRecord, err) => {
+                //     if (userRecord) {
+                //         done(null, userRecord);
+                //     } else {
+                //         const newUser = new userModel({
+                //             ssoId: profile.id,
+                //             name: profile.displayName
+                //         });
+                //         newUser.save().then((newUser) => {
+                //             done(null, newUser);
+                //         })
                 //     }
-                //     UserController.userModel.createUser(newUser, (res) => {
-                //         console.log(res);
-                //     });
-                // }
+                // }).catch(err => {
+                //     console.log(err);
+                // });
+                let user = yield UserController_1.UserController.userModel.findUserBySsoID(profile.id);
+                console.log(user);
+                if (user) {
+                    console.log("existing user");
+                    done(null, user);
+                }
+                else {
+                    console.log("create user");
+                    let newUser = {
+                        name: profile.displayName,
+                        ssoId: profile.id
+                    };
+                    UserController_1.UserController.userModel.createUser(newUser, (res) => {
+                        console.log(res);
+                    });
+                }
                 console.log("+++++++++++++++++++");
                 console.log("==============================================");
                 // this.email = profile.emails[0].value;
                 return done(null, profile);
-            });
+            }));
         }));
         passport.serializeUser(function (user, done) {
             done(null, user);
