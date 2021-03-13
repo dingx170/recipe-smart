@@ -24,7 +24,7 @@ class GooglePassport {
             },
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
-                process.nextTick( () => {
+                process.nextTick( async () => {
                     console.log("==============================================");
                     console.log('validating google profile:' + JSON.stringify(profile));
                     console.log("userId:" + profile.id);
@@ -32,7 +32,7 @@ class GooglePassport {
                     console.log("retrieve all of the profile info needed");
 
                     console.log("+++++++++++++++++++");
-                    let user :any = UserController.userModel.findUserBySsoID(profile.id);
+                    let user :any = await UserController.userModel.findUserBySsoID(profile.id);
                     console.log(user);
 
                     if (user) {
