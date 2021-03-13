@@ -65,7 +65,7 @@ class GooglePassport {
                         name: profile.displayName,
                         ssoId: profile.id
                     };
-                    UserController_1.UserController.userModel.createUser(newUser, (res) => {
+                    UserController_1.UserController.userModel.addUserThruSSO(newUser, (res) => {
                         console.log(res);
                     });
                 }

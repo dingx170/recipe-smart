@@ -116,12 +116,6 @@ class UserModel {
             return yield this.model.findOne({ name: name });
         });
     }
-    findUserBySsoID(ssoId, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log(ssoId);
-            return yield this.model.exists({ ssoId: ssoId });
-        });
-    }
     /**
      * Validate the name and email to see if they already exists
      * @param username
@@ -139,6 +133,28 @@ class UserModel {
                 console.log("validation result: " + res);
                 resp.json(res);
             }
+        });
+    }
+    findUserBySsoID(ssoId, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(ssoId);
+            return yield this.model.exists({ ssoId: ssoId });
+        });
+    }
+    addUserThruSSO(user_specs, res) {
+        CounterModel_1.CounterModel.model.findOneAndUpdate({ "name": "user" }, { $inc: { 'count': 1 } }, { useFindAndModify: false }, (err, record) => {
+            if (err) {
+                res.json({ ret_code: -1, ret_msg: "creation failed", userid: -1 });
+                return;
+            }
+            user_specs.user_id = record.count + 1;
+            this.model(user_specs).save((err, item) => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                return item;
+            });
         });
     }
 }

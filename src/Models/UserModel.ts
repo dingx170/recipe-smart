@@ -130,11 +130,6 @@ class UserModel {
     return await this.model.findOne({name: name});
   }
 
-  public async findUserBySsoID(ssoId: String, res: any){
-    console.log(ssoId);
-    return await this.model.exists({ssoId: ssoId});
-  }
-
   /**
    * Validate the name and email to see if they already exists
    * @param username 
@@ -155,6 +150,34 @@ class UserModel {
 
     });
   }
+
+  
+  public async findUserBySsoID(ssoId: String, res: any){
+    console.log(ssoId);
+    return await this.model.exists({ssoId: ssoId});
+  }
+
+  public addUserThruSSO(user_specs: any, res: any): any{
+
+    CounterModel.model.findOneAndUpdate({"name": "user"}, {$inc: {'count': 1}}, {useFindAndModify: false}, (err, record) => {
+      if (err){
+        res.json({ret_code: -1, ret_msg: "creation failed", userid: -1})
+        return;
+      }
+
+      user_specs.user_id = record.count + 1;
+
+      this.model(user_specs).save((err, item) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        return item;
+      });  
+      
+    });
+  }
+
 }
 
 export {UserModel};
