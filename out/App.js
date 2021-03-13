@@ -61,7 +61,7 @@ class App {
         // this.expApp.use(cookieParser());
         this.expApp.use(passport_1.default.initialize());
         this.expApp.use(passport_1.default.session());
-        this.expApp.use(cors_1.default());
+        this.expApp.use(cors_1.default()); // TO-DO try delete
     }
     // config front end 
     setupFrontEnd() {
@@ -77,9 +77,6 @@ class App {
         MealplanRoute_1.MealplanRoute.registerMealplanRoutes(router);
         Passport_1.Passport.registerRoutes(router);
         this.expApp.use('/', router);
-        router.get('/test', Passport_1.Passport.validateAuth, (req, res) => {
-            console.log('DONE auth');
-        });
     }
 }
 exports.App = App;
