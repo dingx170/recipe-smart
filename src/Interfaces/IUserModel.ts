@@ -9,8 +9,8 @@ interface IUserModel extends Document {
     password:String,
     email: String,
     photo: Buffer,
+    ssoId: String,
     restrictions: [AllergyType]
-    
 }
 
 export {IUserModel};

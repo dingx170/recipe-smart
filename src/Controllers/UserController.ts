@@ -3,7 +3,7 @@ import {UserModel} from '../Models/UserModel';
 
 class UserController{
 
-    private static userModel = UserModel.getInstance();
+    public static userModel = UserModel.getInstance();
 
     /**
      * Delegates to user model to create user, print out log info to the console

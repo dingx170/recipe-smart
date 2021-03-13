@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {RecipeModel} from '../Models/RecipeModel';
+import {Passport} from '../Passport/Passport';
 
 class RecipeController {
 
@@ -50,6 +51,9 @@ class RecipeController {
     /* Member methods */
 
     public static getRecipesByMemberID(req: Request, res: Response) {
+        console.log("---------------MyRecipe------------------");
+        console.log(req.user.id);
+
         let member_id = req.params.member_id;
 
         RecipeModel.retrieveRecipesByMemberID(res, {member_id: member_id});

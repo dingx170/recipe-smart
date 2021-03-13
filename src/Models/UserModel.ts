@@ -36,6 +36,7 @@ class UserModel {
         password: String,
         email: String,
         photo: Buffer,
+        ssoId: String,
         restrictions: [
           {
             type: String,
@@ -123,6 +124,11 @@ class UserModel {
   public async findUser(name: String, password: String, res: any){
     console.log(name);
     return await this.model.findOne({name: name});
+  }
+
+  public async findUserBySsoID(ssoId: String, res: any){
+    console.log(ssoId);
+    return await this.model.findOne({ssoId: ssoId});
   }
 
   /**
