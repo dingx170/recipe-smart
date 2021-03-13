@@ -49,6 +49,9 @@ class UserModel {
     createModel() {
         this.model = mongooseConnection.model("User", this.schema);
     }
+    getModel() {
+        return this.model;
+    }
     /**
      * Retrieve user by id and return structured data to requesting end
      * @param res

@@ -26,7 +26,7 @@ class GooglePassport {
                 console.log("displayName: " + profile.displayName);
                 console.log("retrieve all of the profile info needed");
                 console.log("+++++++++++++++++++");
-                let userModel = UserController_1.UserController.userModel;
+                let userModel = UserController_1.UserController.userModel.getModel();
                 userModel.findOne({
                     ssoId: profile.id
                 }).then((userRecord, err) => {
