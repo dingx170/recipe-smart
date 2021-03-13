@@ -25,11 +25,15 @@ class GooglePassport {
                 console.log("userId:" + profile.id);
                 console.log("displayName: " + profile.displayName);
                 console.log("retrieve all of the profile info needed");
+                console.log("+++++++++++++++++++");
                 let user = UserController_1.UserController.userModel.findUserBySsoID(profile.id);
+                console.log(user);
                 if (user) {
+                    console.log("existing user");
                     done(null, user);
                 }
                 else {
+                    console.log("create user");
                     let newUser = {
                         name: profile.displayName,
                         ssoId: profile.id
@@ -38,6 +42,7 @@ class GooglePassport {
                         console.log(res);
                     });
                 }
+                console.log("+++++++++++++++++++");
                 console.log("==============================================");
                 // this.email = profile.emails[0].value;
                 return done(null, profile);
