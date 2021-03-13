@@ -19,6 +19,14 @@ class Passport {
                 res.redirect('/#/recipes');
             } 
         );
+        recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
+            let id = req.user.id;
+            let name = req.user.displayName;
+            res.json({
+                "id" : id,
+                "name" : name
+            });
+        })
     }
 
     public static validateAuth(req, res, next): void {
