@@ -36,7 +36,7 @@ class GooglePassport {
                 console.log("retrieve all of the profile info needed");
                 console.log("+++++++++++++++++++");
                 let user = yield UserController_1.UserController.userModel.findUserBySsoID(profile.id);
-                console.log(user);
+                console.log(user.name);
                 if (user) {
                     console.log("existing user");
                     done(null, user);

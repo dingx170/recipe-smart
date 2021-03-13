@@ -33,7 +33,7 @@ class GooglePassport {
 
                     console.log("+++++++++++++++++++");
                     let user :any = await UserController.userModel.findUserBySsoID(profile.id);
-                    console.log(user);
+                    console.log(user.name);
 
                     if (user) {
                         console.log("existing user");
