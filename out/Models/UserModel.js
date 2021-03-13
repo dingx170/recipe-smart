@@ -37,6 +37,7 @@ class UserModel {
             password: String,
             email: String,
             photo: Buffer,
+            ssoId: String,
             restrictions: [
                 {
                     type: String,
@@ -110,6 +111,12 @@ class UserModel {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(name);
             return yield this.model.findOne({ name: name });
+        });
+    }
+    findUserBySsoID(ssoId, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(ssoId);
+            return yield this.model.findOne({ ssoId: ssoId });
         });
     }
     /**

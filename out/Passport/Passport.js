@@ -13,6 +13,14 @@ class Passport {
             console.log("redirecting to /#/recipes");
             res.redirect('/#/recipes');
         });
+        recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
+            let id = req.user.id;
+            let name = req.user.displayName;
+            res.json({
+                "id": id,
+                "name": name
+            });
+        });
     }
     static validateAuth(req, res, next) {
         if (req.isAuthenticated()) {

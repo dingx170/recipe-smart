@@ -42,6 +42,8 @@ class RecipeController {
     }
     /* Member methods */
     static getRecipesByMemberID(req, res) {
+        console.log("---------------MyRecipe------------------");
+        console.log(req.user.id);
         let member_id = req.params.member_id;
         RecipeModel_1.RecipeModel.retrieveRecipesByMemberID(res, { member_id: member_id });
     }
