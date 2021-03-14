@@ -8,13 +8,13 @@ class UserRoute{
     public static registerRoutes(userRoute: Router) {
 
         // 2. get requests and pass to controller
-        userRoute.get("/user/:id", UserController.retrieveUserByID);
+        userRoute.get("/api/user/:id", UserController.retrieveUserByID);
 
         // userRoute.get("/user/", UserController.retrieveUser);
         
-        userRoute.post("/user", UserController.createUser);
+        userRoute.post("/api/user", UserController.createUser);
 
-        userRoute.put("/user/:id", UserController.updateUser);
+        userRoute.put("/api/user/:id", UserController.updateUser);
 
         userRoute.post("/api/login", UserController.logincheck);
 

@@ -1348,7 +1348,6 @@ class LoginService {
      */
     login(auth) {
         let url = this.base_api + "api/login";
-        console.log(url);
         return this.http.post(url, auth, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('user login failed')));
     }
     logOut() {
@@ -1965,7 +1964,7 @@ class MealplanService {
     getAllMealPlansForUser() {
         this.userId = this.shareDataService.getData('userid');
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'mealplan/' + this.userId).subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/mealplan/' + this.userId).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -1984,7 +1983,7 @@ class MealplanService {
         });
         this.userId = this.shareDataService.getData('userid');
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'mealplan/' + this.userId + '/customization/getrecipelist', { params: params }).subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/mealplan/' + this.userId + '/customization/getrecipelist', { params: params }).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -1994,7 +1993,7 @@ class MealplanService {
         console.log(mealplan);
         this.userId = this.shareDataService.getData('userid');
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.post(this.hostUrl + `mealplan/${this.userId}/customization/`, mealplan, httpOptions).subscribe((res) => {
+            this.http.post(this.hostUrl + `api/mealplan/${this.userId}/customization/`, mealplan, httpOptions).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2002,7 +2001,7 @@ class MealplanService {
     getRecipeListByMealplanID(mealplanId) {
         this.userId = this.shareDataService.getData('userid');
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'mealplan/' + this.userId + '/plans/' + mealplanId + '/recipelist').subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/mealplan/' + this.userId + '/plans/' + mealplanId + '/recipelist').subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2010,7 +2009,7 @@ class MealplanService {
     getShoppingListByMealplanID(mealplanId) {
         this.userId = this.shareDataService.getData('userid');
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'mealplan/' + this.userId + '/plans/' + mealplanId + '/shoppinglist').subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/mealplan/' + this.userId + '/plans/' + mealplanId + '/shoppinglist').subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2690,14 +2689,14 @@ class RecipeService {
     }
     getAllRecipes() {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'recipes').subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/recipes').subscribe((res) => {
                 observer.next(res);
             });
         });
     }
     getRecipeByID(recipeId) {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'recipes/' + recipeId).subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/recipes/' + recipeId).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2705,14 +2704,14 @@ class RecipeService {
     getRecipesByMemberID() {
         this.userId = this.shareDataService.getData('userid');
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'myrecipes/' + this.userId).subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/myrecipes/' + this.userId).subscribe((res) => {
                 observer.next(res);
             });
         });
     }
     getRecipesByFilter(filter) {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'recipes', { params: filter }).subscribe((res) => {
+            this.http.get(this.hostUrl + 'api/recipes', { params: filter }).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2722,7 +2721,7 @@ class RecipeService {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
             this.userId = this.shareDataService.getData('userid');
             recipe.member_id = this.userId;
-            this.http.post(this.hostUrl + 'myrecipes/' + this.userId, recipe, httpOptions).subscribe((res) => {
+            this.http.post(this.hostUrl + 'api/myrecipes/' + this.userId, recipe, httpOptions).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2731,7 +2730,7 @@ class RecipeService {
         const httpOptions = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
             this.userId = this.shareDataService.getData('userid');
-            this.http.put(this.hostUrl + 'myrecipes/' + this.userId + '/' + recipe.recipe_id, recipe, httpOptions).subscribe((res) => {
+            this.http.put(this.hostUrl + 'api/myrecipes/' + this.userId + '/' + recipe.recipe_id, recipe, httpOptions).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -3412,7 +3411,7 @@ class UserService {
      * @param id
      */
     getUserById(id) {
-        const url = `${this.base_api}/user/${id}`;
+        const url = `${this.base_api}api/user/${id}`;
         return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError(`getUserById id = ${id}`)));
     }
     /**
@@ -3421,7 +3420,7 @@ class UserService {
      * @param id
      */
     updateUser(user, id) {
-        let url = `${this.base_api}/user/${id}`;
+        let url = `${this.base_api}api/user/${id}`;
         return this.http.put(url, user, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('updated user')));
     }
     /**
@@ -3429,7 +3428,7 @@ class UserService {
      * @param user
      */
     addUser(user) {
-        let url = this.base_api + "/user";
+        let url = this.base_api + "api//user";
         return this.http.post(url, user, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('add user operation failed')));
     }
     /**
@@ -3438,7 +3437,7 @@ class UserService {
      */
     validateNameEmail(email, name) {
         // let url:string = `${this.base_api}/validation/?name=${name}&?email=${email}`;
-        let url = this.base_api + "/validation/?name=" + name + "&?email=" + email;
+        let url = this.base_api + "api//validation/?name=" + name + "&?email=" + email;
         return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError(`check username and email username = ${name} email = ${email}`)));
     }
     /**

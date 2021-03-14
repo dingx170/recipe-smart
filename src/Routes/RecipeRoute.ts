@@ -6,9 +6,9 @@ class RecipeRoute {
     public static registerRoutes(recipeRoute: Router) {
 
         // 2. get requests and pass to controller
-        recipeRoute.get("/recipes/:id", RecipeController.getRecipeByID);
+        recipeRoute.get("/api/recipes/:id", RecipeController.getRecipeByID);
         
-        recipeRoute.get("/recipes", RecipeController.getRecipesByFilter);
+        recipeRoute.get("/api/recipes", RecipeController.getRecipesByFilter);
     }
 }
 

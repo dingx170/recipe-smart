@@ -6,13 +6,13 @@ class MyRecipeRoute {
 
     public static registerRoutes(recipeRoute: Router) {
 
-        recipeRoute.get("/myrecipes/:member_id", Passport.validateAuth, RecipeController.getRecipesByMemberID);
+        recipeRoute.get("/api/myrecipes/:member_id", Passport.validateAuth, RecipeController.getRecipesByMemberID);
         
-        recipeRoute.post("/myrecipes/:member_id", RecipeController.postRecipeByMemberID);
+        recipeRoute.post("/api/myrecipes/:member_id", RecipeController.postRecipeByMemberID);
 
-        recipeRoute.put("/myrecipes/:member_id/:recipe_id", RecipeController.putRecipe);
+        recipeRoute.put("/api/myrecipes/:member_id/:recipe_id", RecipeController.putRecipe);
 
-        recipeRoute.delete("/myrecipes/:member_id/:recipe_id", RecipeController.deleteRecipe);
+        recipeRoute.delete("/api/myrecipes/:member_id/:recipe_id", RecipeController.deleteRecipe);
     }
 }
 
