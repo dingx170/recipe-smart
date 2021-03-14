@@ -135,10 +135,25 @@ class UserModel {
             }
         });
     }
-    findUserBySsoID(ssoId, res) {
+    validateUserBySsoId(ssoId) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(ssoId);
             return yield this.model.exists({ ssoId: ssoId });
+        });
+    }
+    /**
+     * Find and return user item by sso id
+     * @param ssoId
+     * @param res
+     */
+    getUserBySsoId(ssoId, res) {
+        let query = this.model.findOne({ ssoId: ssoId });
+        query.exec((err, item) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(item);
+            res.json(item);
         });
     }
     addUserThruSSO(user_specs, res) {

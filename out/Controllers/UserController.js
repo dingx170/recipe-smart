@@ -98,6 +98,9 @@ class UserController {
         UserController.userModel.validateNameEmail(name, email, res);
         console.log("executed validation for name and email");
     }
+    static retrieveUserBySsoId(res, ssoId) {
+        this.userModel.getUserBySsoId(ssoId, res);
+    }
 }
 exports.UserController = UserController;
 UserController.userModel = UserModel_1.UserModel.getInstance();

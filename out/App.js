@@ -75,7 +75,7 @@ class App {
         MyRecipeRoute_1.MyRecipeRoute.registerRoutes(router);
         UserRoute_1.UserRoute.registerRoutes(router);
         MealplanRoute_1.MealplanRoute.registerMealplanRoutes(router);
-        Passport_1.Passport.registerRoutes(router);
+        Passport_1.Passport.registerRoutes(router, this.googlePassportObj);
         this.expApp.use('/', router);
     }
 }

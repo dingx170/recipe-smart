@@ -35,28 +35,14 @@ class GooglePassport {
                 console.log("displayName: " + profile.displayName);
                 console.log("retrieve all of the profile info needed");
                 console.log("+++++++++++++++++++");
-                let userModel = UserController_1.UserController.userModel.getModel();
-                // userModel.findOne({
-                //     ssoId: profile.id
-                // }).then((userRecord, err) => {
-                //     if (userRecord) {
-                //         done(null, userRecord);
-                //     } else {
-                //         const newUser = new userModel({
-                //             ssoId: profile.id,
-                //             name: profile.displayName
-                //         });
-                //         newUser.save().then((newUser) => {
-                //             done(null, newUser);
-                //         })
-                //     }
-                // }).catch(err => {
-                //     console.log(err);
-                // });
-                let user = yield UserController_1.UserController.userModel.findUserBySsoID(profile.id);
+                this.ssoId = profile.id;
+                this.displayName = profile.displayName;
+                // let userModel = UserController.userModel.getModel();
+                let user = yield UserController_1.UserController.userModel.validateUserBySsoID(profile.id);
                 console.log(user);
                 if (user) {
                     console.log("existing user");
+                    // this.userId = user.user_id;
                     done(null, user);
                 }
                 else {
