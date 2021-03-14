@@ -1347,7 +1347,8 @@ class LoginService {
      *
      */
     login(auth) {
-        let url = this.base_api + "/login";
+        let url = this.base_api + "api/login";
+        console.log(url);
         return this.http.post(url, auth, this.httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError('user login failed')));
     }
     logOut() {
