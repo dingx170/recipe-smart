@@ -11,6 +11,8 @@ class GooglePassport {
 
     clientId: string;
     secretId: string;
+    displayName: string;
+    ssoId: string;
      
     constructor() { 
         this.clientId = googleAppAuth.id;
@@ -32,32 +34,17 @@ class GooglePassport {
                     console.log("retrieve all of the profile info needed");
 
                     console.log("+++++++++++++++++++");
+                    this.ssoId = profile.id;
+                    this.displayName = profile.displayName;
 
-                    let userModel = UserController.userModel.getModel();
+                    // let userModel = UserController.userModel.getModel();
 
-                    // userModel.findOne({
-                    //     ssoId: profile.id
-                    // }).then((userRecord, err) => {
-                    //     if (userRecord) {
-                    //         done(null, userRecord);
-                    //     } else {
-                    //         const newUser = new userModel({
-                    //             ssoId: profile.id,
-                    //             name: profile.displayName
-                    //         });
-                    //         newUser.save().then((newUser) => {
-                    //             done(null, newUser);
-                    //         })
-                    //     }
-                    // }).catch(err => {
-                    //     console.log(err);
-                    // });
-
-                    let user :any = await UserController.userModel.findUserBySsoID(profile.id);
+                    let user :any = await UserController.userModel.validateUserBySsoID(profile.id);
                     console.log(user);
 
                     if (user) {
                         console.log("existing user");
+                        // this.userId = user.user_id;
                         done(null, user);
                     } else {
                         console.log("create user");

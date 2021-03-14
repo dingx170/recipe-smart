@@ -152,9 +152,26 @@ class UserModel {
   }
 
   
-  public async findUserBySsoID(ssoId: String, res: any){
+  public async validateUserBySsoId(ssoId: String){
     console.log(ssoId);
     return await this.model.exists({ssoId: ssoId});
+  }
+
+  /**
+   * Find and return user item by sso id
+   * @param ssoId 
+   * @param res 
+   */
+  public getUserBySsoId(ssoId: string, res: any){
+    let query = this.model.findOne({ssoId:ssoId});
+    query.exec((err, item) =>{
+      if(err){
+        console.log(err);
+      }
+      console.log(item);
+      res.json(item); 
+      
+    })
   }
 
   public addUserThruSSO(user_specs: any, res: any): any{

@@ -1,10 +1,14 @@
 import {Router} from "express";
 import passport from 'passport';
+import { UserController } from "../Controllers/UserController";
+import GooglePassport from "./GooglePassport";
+import GooglePassportObj from './GooglePassport';
 
 class Passport {
 
-    public static registerRoutes(recipeRoute: Router) {
+    public static registerRoutes(recipeRoute: Router, googlePassportObj: GooglePassportObj) {
 
+        
         recipeRoute.get('/auth/google', 
             passport.authenticate('google', {scope: ['profile']}));
 
@@ -20,13 +24,14 @@ class Passport {
             } 
         );
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
-            let id = req.user.id;
-            let name = req.user.displayName;
-            res.json({
-                "id" : id,
-                "name" : name
-            });
+            // try get user id from google passport obj
+            let ssoId = googlePassportObj.ssoId;
+            // let id = req.user.id;
+            let name = googlePassportObj.displayName;
+            UserController.retrieveUserBySsoId(res, ssoId);
         })
+
+
     }
 
     public static validateAuth(req, res, next): void {

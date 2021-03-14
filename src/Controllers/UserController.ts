@@ -104,6 +104,10 @@ class UserController{
 
     }
 
+    
+    public static retrieveUserBySsoId(res: Response, ssoId: string){
+        this.userModel.getUserBySsoId(ssoId, res);
+    }
     // public static retrieveUser(req : Request, res : Response){
     //     let filter = req.query.body;
     
@@ -111,6 +115,8 @@ class UserController{
 
     //     console.log("executed retrieve user by condition");
     // }
+
+
 
 }
 export {UserController}
