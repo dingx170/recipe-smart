@@ -39,7 +39,7 @@ class GooglePassport {
 
                     // let userModel = UserController.userModel.getModel();
 
-                    let user :any = await UserController.userModel.validateUserBySsoID(profile.id);
+                    let user :any = await UserController.userModel.validateUserBySsoId(profile.id);
                     console.log(user);
 
                     if (user) {

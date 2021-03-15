@@ -38,7 +38,7 @@ class GooglePassport {
                 this.ssoId = profile.id;
                 this.displayName = profile.displayName;
                 // let userModel = UserController.userModel.getModel();
-                let user = yield UserController_1.UserController.userModel.validateUserBySsoID(profile.id);
+                let user = yield UserController_1.UserController.userModel.validateUserBySsoId(profile.id);
                 console.log(user);
                 if (user) {
                     console.log("existing user");
