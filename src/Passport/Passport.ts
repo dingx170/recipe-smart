@@ -26,9 +26,10 @@ class Passport {
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
             // try get user id from google passport obj
             let ssoId = googlePassportObj.ssoId;
-            // let id = req.user.id;
-            let name = googlePassportObj.displayName;
+        
             UserController.retrieveUserBySsoId(res, ssoId);
+
+            // Will it still pass any result if directed to index page? No.
         })
 
 
