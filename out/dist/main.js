@@ -68,9 +68,9 @@ class RecipelistComponent {
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
+            this.mealplanId = this.route.snapshot.params['mealplanId'];
+            this.getRecipeList();
         });
-        this.mealplanId = this.route.snapshot.params['mealplanId'];
-        this.getRecipeList();
     }
     getRecipeList() {
         var rxjsData = this.recipeService.getRecipeListByMealplanID(this.mealplanId, this.userId);
@@ -824,8 +824,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _enums_recipe_tag_enum__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../enums/recipe-tag.enum */ "GBHd");
 /* harmony import */ var _services_recipe_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/recipe.service */ "ZC9A");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/auth.service */ "lGQG");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+
 
 
 
@@ -1033,9 +1035,10 @@ function NewrecipeComponent_button_75_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 class NewrecipeComponent {
-    constructor(recipeService, route) {
+    constructor(recipeService, route, authService) {
         this.recipeService = recipeService;
         this.route = route;
+        this.authService = authService;
         this.allergies = Object.keys(_enums_food_allergy_enum__WEBPACK_IMPORTED_MODULE_1__["FoodAllergy"]);
         this.cuisineTypes = Object.keys(_enums_cuisine_enum__WEBPACK_IMPORTED_MODULE_2__["Cuisine"]);
         this.featureTypes = Object.keys(_enums_feature_enum__WEBPACK_IMPORTED_MODULE_3__["Feature"]);
@@ -1065,6 +1068,11 @@ class NewrecipeComponent {
     }
     ngOnInit() {
         this.isUpdate = this.route.snapshot.data.isUpdate;
+        //added getSession to get user_id
+        this.authService.getSession().subscribe(data => {
+            this.userId = data.user_id;
+            console.log(JSON.stringify(data));
+        });
         if (this.isUpdate) {
             this.route.params.subscribe((value) => {
                 this.getRecipeContent(value.recipeId);
@@ -1098,7 +1106,7 @@ class NewrecipeComponent {
     createRecipe() {
         this.recipe.date = new Date();
         this.recipe.unit_cost = Math.ceil(this.recipe.cost / this.recipe.group);
-        var rxjsData = this.recipeService.postNewRecipe(this.recipe);
+        var rxjsData = this.recipeService.postNewRecipe(this.recipe, this.userId);
         rxjsData.subscribe((data) => {
             console.log(data);
             alert("Success!");
@@ -1107,7 +1115,7 @@ class NewrecipeComponent {
     updateRecipe() {
         this.recipe.date = new Date();
         this.recipe.unit_cost = Math.ceil(this.recipe.cost / this.recipe.group);
-        var rxjsData = this.recipeService.updateOneRecipe(this.recipe);
+        var rxjsData = this.recipeService.updateOneRecipe(this.recipe, this.userId);
         rxjsData.subscribe((data) => {
             console.log(data);
             alert("Success!");
@@ -1132,7 +1140,7 @@ class NewrecipeComponent {
         });
     }
 }
-NewrecipeComponent.ɵfac = function NewrecipeComponent_Factory(t) { return new (t || NewrecipeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_recipe_service__WEBPACK_IMPORTED_MODULE_6__["RecipeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"])); };
+NewrecipeComponent.ɵfac = function NewrecipeComponent_Factory(t) { return new (t || NewrecipeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_recipe_service__WEBPACK_IMPORTED_MODULE_6__["RecipeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"])); };
 NewrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NewrecipeComponent, selectors: [["app-newrecipe"]], decls: 77, vars: 20, consts: [[1, "row"], [1, "col-1"], [1, "col-11"], ["class", "page-text", 4, "ngIf"], [1, "col-2"], [1, "form-group"], ["for", "mealType", 1, "filter-label"], ["name", "mealType", "id", "mealType", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["for", "cuisineType", 1, "filter-label"], ["name", "cuisineType", "id", "cuisineType", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "featureType", 1, "filter-label"], ["name", "featureType", "id", "featureType", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "budget", 1, "filter-label"], ["name", "budget", "id", "budget", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "groupSize", 1, "filter-label"], ["name", "groupSize", "id", "groupSize", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "allergies", 1, "filter-label"], ["name", "allergies", "id", "allergies", "multiple", "multiple", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "name", 1, "subtitle-text"], ["type", "text", "name", "name", "id", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "steps", 1, "subtitle-text"], ["class", "container", 4, "ngFor", "ngForOf"], ["type", "button", 1, "btn", "btn-block", 3, "click"], ["for", "ingredients", 1, "subtitle-text"], [1, "subtitle-text"], ["type", "file", "accept", "image/*", 3, "change"], ["file", ""], [1, "row", "pic-row"], [1, "col"], ["class", "pic-holder", 3, "src", 4, "ngIf"], [1, "col", "text-center"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "submit new recipe", 3, "click", 4, "ngIf"], [1, "page-text"], [3, "value"], [1, "container"], ["type", "text", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["type", "button", 1, "btn", "btn-danger", 3, "click"], [1, "pic-holder", 3, "src"], ["type", "submit", "title", "submit new recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"]], template: function NewrecipeComponent_Template(rf, ctx) { if (rf & 1) {
         const _r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -1303,7 +1311,7 @@ NewrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.isUpdate);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.isUpdate);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["SelectMultipleControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵangular_packages_forms_forms_x"]], styles: [".page-text[_ngcontent-%COMP%] {\n    padding-top: 20px;\n    font-size: 50px;\n    color: #f58f8fff;\n    font-weight: bold;\n    font-family: cursive;\n}\n\n.subtitle-text[_ngcontent-%COMP%] {\n    padding-top: 20px;\n    font-size: 30px;\n    color: #f58f8fff;\n    font-weight: bold;\n    font-family: cursive;\n    margin-bottom:  20px;\n}\n\n.filter-btn[_ngcontent-%COMP%] {\n    font-size: 20px;\n    font-weight: bold;\n    background-color: #f6cd4cff; \n    color: white;\n}\n\n.filter-label[_ngcontent-%COMP%] {\n    font-size: 20px;\n    font-weight: bold;\n    background-color: #f6cd4cff; \n    color: white;\n    padding-left: 20px;\n    padding-right: 20px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n}\n\n.form-check-label[_ngcontent-%COMP%]{\n    font-size: 16px;\n}\n\n.submit-btn[_ngcontent-%COMP%] {\n    font-size: 20px;\n    font-weight: bold;\n    background-color: #f58f8fff; \n    border: 1px solid #f58f8fff;\n    color: white;\n}\n\n.submit-text[_ngcontent-%COMP%]{\n    font-family: cursive;\n    font-size: 30px;\n    color: #f58f8fff;\n    font-weight: bold;\n    padding-left: 20px;\n}\n\n.btn-block[_ngcontent-%COMP%]{\n    font-size: 20px;\n    font-weight: bold;\n    background-color: rgb(238, 182, 182); \n    color: white;\n}\n\n.pic-row[_ngcontent-%COMP%] {\n    min-height: 400px;\n    text-align:center;\n    background-color: rgb(226, 222, 222);\n    margin-left: 10%;\n    margin-right: 10%;\n}\n\n.pic-holder[_ngcontent-%COMP%] {\n    height: 400px;\n}\n\n.submit-center[_ngcontent-%COMP%] {\n    display: block;\n    margin: 0 auto;\n    width:200px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5ld3JlY2lwZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0lBQ2pCLGVBQWU7SUFDZixnQkFBZ0I7SUFDaEIsaUJBQWlCO0lBQ2pCLG9CQUFvQjtBQUN4Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixlQUFlO0lBQ2YsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtJQUNqQixvQkFBb0I7SUFDcEIsb0JBQW9CO0FBQ3hCOztBQUVBO0lBQ0ksZUFBZTtJQUNmLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLGVBQWU7SUFDZixpQkFBaUI7SUFDakIsMkJBQTJCO0lBQzNCLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGdCQUFnQjtJQUNoQixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksZUFBZTtJQUNmLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsMkJBQTJCO0lBQzNCLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxvQkFBb0I7SUFDcEIsZUFBZTtJQUNmLGdCQUFnQjtJQUNoQixpQkFBaUI7SUFDakIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksZUFBZTtJQUNmLGlCQUFpQjtJQUNqQixvQ0FBb0M7SUFDcEMsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIsb0NBQW9DO0lBQ3BDLGdCQUFnQjtJQUNoQixpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxhQUFhO0FBQ2pCOztBQUVBO0lBQ0ksY0FBYztJQUNkLGNBQWM7SUFDZCxXQUFXO0FBQ2YiLCJmaWxlIjoibmV3cmVjaXBlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucGFnZS10ZXh0IHtcbiAgICBwYWRkaW5nLXRvcDogMjBweDtcbiAgICBmb250LXNpemU6IDUwcHg7XG4gICAgY29sb3I6ICNmNThmOGZmZjtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LWZhbWlseTogY3Vyc2l2ZTtcbn1cblxuLnN1YnRpdGxlLXRleHQge1xuICAgIHBhZGRpbmctdG9wOiAyMHB4O1xuICAgIGZvbnQtc2l6ZTogMzBweDtcbiAgICBjb2xvcjogI2Y1OGY4ZmZmO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtZmFtaWx5OiBjdXJzaXZlO1xuICAgIG1hcmdpbi1ib3R0b206ICAyMHB4O1xufVxuXG4uZmlsdGVyLWJ0biB7XG4gICAgZm9udC1zaXplOiAyMHB4O1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNmNmNkNGNmZjsgXG4gICAgY29sb3I6IHdoaXRlO1xufVxuXG4uZmlsdGVyLWxhYmVsIHtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y2Y2Q0Y2ZmOyBcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgcGFkZGluZy1sZWZ0OiAyMHB4O1xuICAgIHBhZGRpbmctcmlnaHQ6IDIwcHg7XG4gICAgcGFkZGluZy10b3A6IDVweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xufVxuXG4uZm9ybS1jaGVjay1sYWJlbHtcbiAgICBmb250LXNpemU6IDE2cHg7XG59XG5cbi5zdWJtaXQtYnRuIHtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y1OGY4ZmZmOyBcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZjU4ZjhmZmY7XG4gICAgY29sb3I6IHdoaXRlO1xufVxuXG4uc3VibWl0LXRleHR7XG4gICAgZm9udC1mYW1pbHk6IGN1cnNpdmU7XG4gICAgZm9udC1zaXplOiAzMHB4O1xuICAgIGNvbG9yOiAjZjU4ZjhmZmY7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgcGFkZGluZy1sZWZ0OiAyMHB4O1xufVxuXG4uYnRuLWJsb2Nre1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjM4LCAxODIsIDE4Mik7IFxuICAgIGNvbG9yOiB3aGl0ZTtcbn1cblxuLnBpYy1yb3cge1xuICAgIG1pbi1oZWlnaHQ6IDQwMHB4O1xuICAgIHRleHQtYWxpZ246Y2VudGVyO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigyMjYsIDIyMiwgMjIyKTtcbiAgICBtYXJnaW4tbGVmdDogMTAlO1xuICAgIG1hcmdpbi1yaWdodDogMTAlO1xufVxuXG4ucGljLWhvbGRlciB7XG4gICAgaGVpZ2h0OiA0MDBweDtcbn1cblxuLnN1Ym1pdC1jZW50ZXIge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIHdpZHRoOjIwMHB4O1xufSJdfQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_9__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_9__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["SelectMultipleControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ɵangular_packages_forms_forms_x"]], styles: [".page-text[_ngcontent-%COMP%] {\n    padding-top: 20px;\n    font-size: 50px;\n    color: #f58f8fff;\n    font-weight: bold;\n    font-family: cursive;\n}\n\n.subtitle-text[_ngcontent-%COMP%] {\n    padding-top: 20px;\n    font-size: 30px;\n    color: #f58f8fff;\n    font-weight: bold;\n    font-family: cursive;\n    margin-bottom:  20px;\n}\n\n.filter-btn[_ngcontent-%COMP%] {\n    font-size: 20px;\n    font-weight: bold;\n    background-color: #f6cd4cff; \n    color: white;\n}\n\n.filter-label[_ngcontent-%COMP%] {\n    font-size: 20px;\n    font-weight: bold;\n    background-color: #f6cd4cff; \n    color: white;\n    padding-left: 20px;\n    padding-right: 20px;\n    padding-top: 5px;\n    padding-bottom: 5px;\n}\n\n.form-check-label[_ngcontent-%COMP%]{\n    font-size: 16px;\n}\n\n.submit-btn[_ngcontent-%COMP%] {\n    font-size: 20px;\n    font-weight: bold;\n    background-color: #f58f8fff; \n    border: 1px solid #f58f8fff;\n    color: white;\n}\n\n.submit-text[_ngcontent-%COMP%]{\n    font-family: cursive;\n    font-size: 30px;\n    color: #f58f8fff;\n    font-weight: bold;\n    padding-left: 20px;\n}\n\n.btn-block[_ngcontent-%COMP%]{\n    font-size: 20px;\n    font-weight: bold;\n    background-color: rgb(238, 182, 182); \n    color: white;\n}\n\n.pic-row[_ngcontent-%COMP%] {\n    min-height: 400px;\n    text-align:center;\n    background-color: rgb(226, 222, 222);\n    margin-left: 10%;\n    margin-right: 10%;\n}\n\n.pic-holder[_ngcontent-%COMP%] {\n    height: 400px;\n}\n\n.submit-center[_ngcontent-%COMP%] {\n    display: block;\n    margin: 0 auto;\n    width:200px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5ld3JlY2lwZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0lBQ2pCLGVBQWU7SUFDZixnQkFBZ0I7SUFDaEIsaUJBQWlCO0lBQ2pCLG9CQUFvQjtBQUN4Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixlQUFlO0lBQ2YsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtJQUNqQixvQkFBb0I7SUFDcEIsb0JBQW9CO0FBQ3hCOztBQUVBO0lBQ0ksZUFBZTtJQUNmLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLGVBQWU7SUFDZixpQkFBaUI7SUFDakIsMkJBQTJCO0lBQzNCLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGdCQUFnQjtJQUNoQixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksZUFBZTtJQUNmLGlCQUFpQjtJQUNqQiwyQkFBMkI7SUFDM0IsMkJBQTJCO0lBQzNCLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxvQkFBb0I7SUFDcEIsZUFBZTtJQUNmLGdCQUFnQjtJQUNoQixpQkFBaUI7SUFDakIsa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksZUFBZTtJQUNmLGlCQUFpQjtJQUNqQixvQ0FBb0M7SUFDcEMsWUFBWTtBQUNoQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIsb0NBQW9DO0lBQ3BDLGdCQUFnQjtJQUNoQixpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxhQUFhO0FBQ2pCOztBQUVBO0lBQ0ksY0FBYztJQUNkLGNBQWM7SUFDZCxXQUFXO0FBQ2YiLCJmaWxlIjoibmV3cmVjaXBlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucGFnZS10ZXh0IHtcbiAgICBwYWRkaW5nLXRvcDogMjBweDtcbiAgICBmb250LXNpemU6IDUwcHg7XG4gICAgY29sb3I6ICNmNThmOGZmZjtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBmb250LWZhbWlseTogY3Vyc2l2ZTtcbn1cblxuLnN1YnRpdGxlLXRleHQge1xuICAgIHBhZGRpbmctdG9wOiAyMHB4O1xuICAgIGZvbnQtc2l6ZTogMzBweDtcbiAgICBjb2xvcjogI2Y1OGY4ZmZmO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGZvbnQtZmFtaWx5OiBjdXJzaXZlO1xuICAgIG1hcmdpbi1ib3R0b206ICAyMHB4O1xufVxuXG4uZmlsdGVyLWJ0biB7XG4gICAgZm9udC1zaXplOiAyMHB4O1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNmNmNkNGNmZjsgXG4gICAgY29sb3I6IHdoaXRlO1xufVxuXG4uZmlsdGVyLWxhYmVsIHtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y2Y2Q0Y2ZmOyBcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgcGFkZGluZy1sZWZ0OiAyMHB4O1xuICAgIHBhZGRpbmctcmlnaHQ6IDIwcHg7XG4gICAgcGFkZGluZy10b3A6IDVweDtcbiAgICBwYWRkaW5nLWJvdHRvbTogNXB4O1xufVxuXG4uZm9ybS1jaGVjay1sYWJlbHtcbiAgICBmb250LXNpemU6IDE2cHg7XG59XG5cbi5zdWJtaXQtYnRuIHtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y1OGY4ZmZmOyBcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZjU4ZjhmZmY7XG4gICAgY29sb3I6IHdoaXRlO1xufVxuXG4uc3VibWl0LXRleHR7XG4gICAgZm9udC1mYW1pbHk6IGN1cnNpdmU7XG4gICAgZm9udC1zaXplOiAzMHB4O1xuICAgIGNvbG9yOiAjZjU4ZjhmZmY7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgcGFkZGluZy1sZWZ0OiAyMHB4O1xufVxuXG4uYnRuLWJsb2Nre1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjM4LCAxODIsIDE4Mik7IFxuICAgIGNvbG9yOiB3aGl0ZTtcbn1cblxuLnBpYy1yb3cge1xuICAgIG1pbi1oZWlnaHQ6IDQwMHB4O1xuICAgIHRleHQtYWxpZ246Y2VudGVyO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigyMjYsIDIyMiwgMjIyKTtcbiAgICBtYXJnaW4tbGVmdDogMTAlO1xuICAgIG1hcmdpbi1yaWdodDogMTAlO1xufVxuXG4ucGljLWhvbGRlciB7XG4gICAgaGVpZ2h0OiA0MDBweDtcbn1cblxuLnN1Ym1pdC1jZW50ZXIge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIHdpZHRoOjIwMHB4O1xufSJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](NewrecipeComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -1311,7 +1319,7 @@ NewrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
                 templateUrl: './newrecipe.component.html',
                 styleUrls: ['./newrecipe.component.css']
             }]
-    }], function () { return [{ type: _services_recipe_service__WEBPACK_IMPORTED_MODULE_6__["RecipeService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }]; }, null); })();
+    }], function () { return [{ type: _services_recipe_service__WEBPACK_IMPORTED_MODULE_6__["RecipeService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }, { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"] }]; }, null); })();
 
 
 /***/ }),
@@ -1613,6 +1621,7 @@ class NewplanComponent {
         });
     }
     getRecipesForCustomized() {
+        console.log("userid" + this.userId);
         var rxjsData = this.mealplanService.getRecipesByFilter(this.filter, this.userId);
         this.mealplan.recipe_list = [];
         rxjsData.subscribe((data) => {
@@ -1904,16 +1913,17 @@ class OldplanComponent {
         this.mealplans = [];
     }
     ngOnInit() {
+        console.log(this.userId + " init history");
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
-        });
-        console.log("this is my user id: " + this.userId);
-        this.mealplan.getAllMealPlansForUser(this.userId)
-            .subscribe((result) => {
-            console.log(result);
-            this.mealplans = result;
-            console.log(this.mealplans);
+            console.log("this is my user id: " + this.userId);
+            this.mealplan.getAllMealPlansForUser(this.userId)
+                .subscribe((result) => {
+                console.log(result);
+                this.mealplans = result;
+                console.log(this.mealplans);
+            });
         });
     }
 }
@@ -2698,17 +2708,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var _share_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./share-data.service */ "99Yc");
-
 
 
 
 
 
 class RecipeService {
-    constructor(http, shareDataService) {
+    constructor(http) {
         this.http = http;
-        this.shareDataService = shareDataService;
         // hostUrl: string = 'http://localhost:8080/api/';
         this.hostUrl = '/api/';
     }
@@ -2726,10 +2733,9 @@ class RecipeService {
             });
         });
     }
-    getRecipesByMemberID() {
-        this.userId = this.shareDataService.getData('userid');
+    getRecipesByMemberID(userId) {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.http.get(this.hostUrl + 'myrecipes/' + this.userId).subscribe((res) => {
+            this.http.get(this.hostUrl + 'myrecipes/' + userId).subscribe((res) => {
                 observer.next(res);
             });
         });
@@ -2741,34 +2747,32 @@ class RecipeService {
             });
         });
     }
-    postNewRecipe(recipe) {
+    postNewRecipe(recipe, userId) {
         const httpOptions = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.userId = this.shareDataService.getData('userid');
-            recipe.member_id = this.userId;
-            this.http.post(this.hostUrl + 'myrecipes/' + this.userId, recipe, httpOptions).subscribe((res) => {
+            recipe.member_id = userId;
+            this.http.post(this.hostUrl + 'myrecipes/' + userId, recipe, httpOptions).subscribe((res) => {
                 observer.next(res);
             });
         });
     }
-    updateOneRecipe(recipe) {
+    updateOneRecipe(recipe, userId) {
         const httpOptions = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({ 'Content-Type': 'application/json' }) };
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"]((observer) => {
-            this.userId = this.shareDataService.getData('userid');
-            this.http.put(this.hostUrl + 'myrecipes/' + this.userId + '/' + recipe.recipe_id, recipe, httpOptions).subscribe((res) => {
+            this.http.put(this.hostUrl + 'myrecipes/' + userId + '/' + recipe.recipe_id, recipe, httpOptions).subscribe((res) => {
                 observer.next(res);
             });
         });
     }
 }
-RecipeService.ɵfac = function RecipeService_Factory(t) { return new (t || RecipeService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_share_data_service__WEBPACK_IMPORTED_MODULE_3__["ShareDataService"])); };
+RecipeService.ɵfac = function RecipeService_Factory(t) { return new (t || RecipeService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
 RecipeService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: RecipeService, factory: RecipeService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](RecipeService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }, { type: _share_data_service__WEBPACK_IMPORTED_MODULE_3__["ShareDataService"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
@@ -2785,8 +2789,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OldrecipeComponent", function() { return OldrecipeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _services_recipe_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/recipe.service */ "ZC9A");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/auth.service */ "lGQG");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
@@ -2812,21 +2818,26 @@ function OldrecipeComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](item_r1.name);
 } }
 class OldrecipeComponent {
-    constructor(recipeService) {
+    constructor(recipeService, authService) {
         this.recipeService = recipeService;
+        this.authService = authService;
     }
     ngOnInit() {
         this.hostUrl = this.recipeService.hostUrl;
-        this.getMyRecipes();
+        this.authService.getSession().subscribe(data => {
+            this.userId = data.user_id;
+            console.log(JSON.stringify(data));
+            this.getMyRecipes();
+        });
     }
     getMyRecipes() {
-        var rxjsData = this.recipeService.getRecipesByMemberID();
+        var rxjsData = this.recipeService.getRecipesByMemberID(this.userId);
         rxjsData.subscribe((data) => {
             this.myrecipes = data;
         });
     }
 }
-OldrecipeComponent.ɵfac = function OldrecipeComponent_Factory(t) { return new (t || OldrecipeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_recipe_service__WEBPACK_IMPORTED_MODULE_1__["RecipeService"])); };
+OldrecipeComponent.ɵfac = function OldrecipeComponent_Factory(t) { return new (t || OldrecipeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_recipe_service__WEBPACK_IMPORTED_MODULE_1__["RecipeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"])); };
 OldrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: OldrecipeComponent, selectors: [["app-oldrecipe"]], decls: 8, vars: 1, consts: [[1, "row"], [1, "col-1"], [1, "container-fluid", "bg-3", "text-center"], [1, "row", "picrow"], ["class", "col-4", 4, "ngFor", "ngForOf"], [1, "col-2"], [1, "col-4"], [3, "routerLink"], ["alt", "Image", 1, "img-responsive", "recipe-pic", 3, "src"], [1, "recipe-name"]], template: function OldrecipeComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "br");
@@ -2842,7 +2853,7 @@ OldrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.myrecipes);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLinkWithHref"]], styles: [".recipe-pic[_ngcontent-%COMP%] {\n    height: 220px;\n    width: 270px;\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n}\n\n.recipe-name[_ngcontent-%COMP%] {\n    text-align: center;\n    margin-bottom: 50px;\n    font-size: 20px;\n    font-weight: bold;\n    color: rgb(228, 176, 6)\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm9sZHJlY2lwZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksYUFBYTtJQUNiLFlBQVk7SUFDWixjQUFjO0lBQ2QsaUJBQWlCO0lBQ2pCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQjtBQUNKIiwiZmlsZSI6Im9sZHJlY2lwZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnJlY2lwZS1waWMge1xuICAgIGhlaWdodDogMjIwcHg7XG4gICAgd2lkdGg6IDI3MHB4O1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICAgIG1hcmdpbi1yaWdodDogYXV0bztcbn1cblxuLnJlY2lwZS1uYW1lIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbWFyZ2luLWJvdHRvbTogNTBweDtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgY29sb3I6IHJnYigyMjgsIDE3NiwgNilcbn1cbiJdfQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterLinkWithHref"]], styles: [".recipe-pic[_ngcontent-%COMP%] {\n    height: 220px;\n    width: 270px;\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n}\n\n.recipe-name[_ngcontent-%COMP%] {\n    text-align: center;\n    margin-bottom: 50px;\n    font-size: 20px;\n    font-weight: bold;\n    color: rgb(228, 176, 6)\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm9sZHJlY2lwZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksYUFBYTtJQUNiLFlBQVk7SUFDWixjQUFjO0lBQ2QsaUJBQWlCO0lBQ2pCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQjtBQUNKIiwiZmlsZSI6Im9sZHJlY2lwZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnJlY2lwZS1waWMge1xuICAgIGhlaWdodDogMjIwcHg7XG4gICAgd2lkdGg6IDI3MHB4O1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1hcmdpbi1sZWZ0OiBhdXRvO1xuICAgIG1hcmdpbi1yaWdodDogYXV0bztcbn1cblxuLnJlY2lwZS1uYW1lIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgbWFyZ2luLWJvdHRvbTogNTBweDtcbiAgICBmb250LXNpemU6IDIwcHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgY29sb3I6IHJnYigyMjgsIDE3NiwgNilcbn1cbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](OldrecipeComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -2850,7 +2861,7 @@ OldrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
                 templateUrl: './oldrecipe.component.html',
                 styleUrls: ['./oldrecipe.component.css']
             }]
-    }], function () { return [{ type: _services_recipe_service__WEBPACK_IMPORTED_MODULE_1__["RecipeService"] }]; }, null); })();
+    }], function () { return [{ type: _services_recipe_service__WEBPACK_IMPORTED_MODULE_1__["RecipeService"] }, { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] }]; }, null); })();
 
 
 /***/ }),
@@ -2918,9 +2929,10 @@ class ShoppinglistComponent {
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
+            console.log("user " + this.userId + " getting shoppinglist");
+            this.mealplanId = this.route.snapshot.params['mealplanId'];
+            this.getShoppingList();
         });
-        this.mealplanId = this.route.snapshot.params['mealplanId'];
-        this.getShoppingList();
     }
     getShoppingList() {
         var rxjsData = this.recipeService.getShoppingListByMealplanID(this.mealplanId, this.userId);
