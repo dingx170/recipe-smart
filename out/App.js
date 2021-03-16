@@ -55,7 +55,7 @@ class App {
             saveUninitialized: false,
             resave: false,
             cookie: {
-                maxAge: 10 * 1000 * 6 // expiration time in mili
+                maxAge: 60 * 1000 * 60 // expiration time in mili
             }
         }));
         // this.expApp.use(cookieParser());
