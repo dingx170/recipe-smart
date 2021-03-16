@@ -38,7 +38,7 @@ class App {
             saveUninitialized: false,  
             resave: false,  
             cookie: {
-                maxAge: 10 * 1000  // expiration time in mili
+                maxAge: 10 * 1000 * 6  // expiration time in mili
             }
         }));
 
