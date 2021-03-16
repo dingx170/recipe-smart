@@ -1613,6 +1613,7 @@ class NewplanComponent {
         });
     }
     getRecipesForCustomized() {
+        console.log("userid" + this.userId);
         var rxjsData = this.mealplanService.getRecipesByFilter(this.filter, this.userId);
         this.mealplan.recipe_list = [];
         rxjsData.subscribe((data) => {
@@ -1904,6 +1905,7 @@ class OldplanComponent {
         this.mealplans = [];
     }
     ngOnInit() {
+        console.log(this.userId + " init history");
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
@@ -2918,6 +2920,7 @@ class ShoppinglistComponent {
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
+            console.log("user " + this.userId + " getting shoppinglist");
             this.mealplanId = this.route.snapshot.params['mealplanId'];
             this.getShoppingList();
         });

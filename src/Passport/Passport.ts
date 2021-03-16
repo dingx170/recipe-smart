@@ -38,7 +38,7 @@ class Passport {
     public static validateAuth(req, res, next): void {
         if (req.isAuthenticated()) { console.log("user is authenticated"); return next(); }
         console.log("user is not authenticated");
-        res.redirect('/');
+        res.redirect('/#/recipes');
     }
 }
 
