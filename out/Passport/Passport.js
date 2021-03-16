@@ -22,7 +22,7 @@ class Passport {
         });
     }
     static validateAuth(req, res, next) {
-        console.log("req.cookies.user_sid: " + req.cookies.user_sid);
+        //console.log("req.cookies.user_sid: " + req.cookies.user_sid);
         if (req.isAuthenticated()) {
             console.log("user is authenticated");
             return next();
