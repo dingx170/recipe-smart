@@ -36,9 +36,10 @@ class Passport {
     }
 
     public static validateAuth(req, res, next): void {
+        //console.log("req.cookies.user_sid: " + req.cookies.user_sid);
         if (req.isAuthenticated()) { console.log("user is authenticated"); return next(); }
         console.log("user is not authenticated");
-        res.redirect('/');
+        res.redirect('/#/recipes');
     }
 }
 
