@@ -68,9 +68,9 @@ class RecipelistComponent {
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
+            this.mealplanId = this.route.snapshot.params['mealplanId'];
+            this.getRecipeList();
         });
-        this.mealplanId = this.route.snapshot.params['mealplanId'];
-        this.getRecipeList();
     }
     getRecipeList() {
         var rxjsData = this.recipeService.getRecipeListByMealplanID(this.mealplanId, this.userId);
@@ -2918,9 +2918,9 @@ class ShoppinglistComponent {
         this.authService.getSession().subscribe(data => {
             this.userId = data.user_id;
             console.log("Get response: " + JSON.stringify(data));
+            this.mealplanId = this.route.snapshot.params['mealplanId'];
+            this.getShoppingList();
         });
-        this.mealplanId = this.route.snapshot.params['mealplanId'];
-        this.getShoppingList();
     }
     getShoppingList() {
         var rxjsData = this.recipeService.getShoppingListByMealplanID(this.mealplanId, this.userId);
