@@ -5,8 +5,7 @@ import {AllergyType} from '../Enums/AllergyType'
 interface IUserModel extends Document {
     
     user_id: Number,
-    name: String;
-    password:String,
+    name: String, 
     email: String,
     photo: Buffer,
     ssoId: String,

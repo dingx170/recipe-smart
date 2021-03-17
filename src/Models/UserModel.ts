@@ -33,7 +33,6 @@ class UserModel {
       {
         user_id: Number,
         name: String,
-        password: String,
         email: String,
         photo: Buffer,
         ssoId: String,
