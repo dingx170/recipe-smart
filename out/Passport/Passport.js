@@ -10,7 +10,6 @@ let logout = require('express-passport-logout');
 class Passport {
     static registerRoutes(recipeRoute, googlePassportObj) {
         recipeRoute.get('/auth/google', passport_1.default.authenticate('google', { scope: ['profile', 'email'] }));
-        // req.session.loginUser = ans.user_id;
         recipeRoute.get('/auth/google/callback', passport_1.default.authenticate('google', { failureRedirect: '/' }), (req, res) => {
             console.log("successfully authenticated user and returned to callback page.");
             console.log("redirecting to /#/recipes");
@@ -18,15 +17,12 @@ class Passport {
             res.redirect('/#/');
         });
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
-            // try get user id from google passport obj
             let ssoId = googlePassportObj.ssoId;
-            // try get user id from google passport obj
             UserController_1.UserController.retrieveUserBySsoId(res, ssoId);
-            // Will it still pass any result if directed to index page? No.
         });
         recipeRoute.get('/logout', (req, res) => {
             console.log("Recv log out request");
-            // googlePassportObj.clientEmail = "";
+            googlePassportObj.clientEmail = "";
             logout();
             return res.redirect("/#/recipes");
         });

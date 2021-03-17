@@ -32,6 +32,7 @@ class Passport {
 
         recipeRoute.get('/logout', (req, res) =>{
             console.log("Recv log out request");
+            googlePassportObj.clientEmail = "";
             logout();
 
             return res.redirect("/#/recipes");
