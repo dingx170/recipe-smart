@@ -38,16 +38,18 @@ class Passport {
         });
 
         recipeRoute.get('/logout', (req, res) =>{
+            console.log("Recv log out request");
             // googlePassportObj.clientEmail = "";
             logout();
             return res.redirect("/#/recipes");
         });
 
         recipeRoute.get('/loggedIn', (req, res) => {
+            console.log('Recv status request');
             if(googlePassportObj.clientEmail != null && googlePassportObj.clientEmail != ""){
-                res.send(1);
+                res.send("true");
             }else{
-                res.send(-1); 
+                res.send("false"); 
             }
         });
 
