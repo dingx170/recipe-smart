@@ -4,6 +4,7 @@
   "description": "",
   "main": "out/AppServer.js",
   "scripts": {
+    "test": "mocha",
     "start": "node out/AppServer.js"
   },
   "repository": {
