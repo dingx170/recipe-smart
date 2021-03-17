@@ -807,29 +807,37 @@ function NewrecipeComponent_div_70_Template(rf, ctx) { if (rf & 1) {
     const _r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "br");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 42);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NewrecipeComponent_div_70_Template_button_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35); const ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r34.clearReport(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Clear Report");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "hr");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "label", 42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "button", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NewrecipeComponent_div_70_Template_button_click_5_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35); const ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r34.clearReport(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Clear Warning");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Warning: ", ctx_r12.recipe.labelerrors, "");
 } }
 function NewrecipeComponent_button_75_Template(rf, ctx) { if (rf & 1) {
     const _r37 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 44);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NewrecipeComponent_button_75_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r37); const ctx_r36 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r36.createRecipe(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Submit Recipe");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function NewrecipeComponent_button_76_Template(rf, ctx) { if (rf & 1) {
     const _r39 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 43);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NewrecipeComponent_button_76_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r39); const ctx_r38 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r38.updateRecipe(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Update Recipe");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function NewrecipeComponent_button_78_Template(rf, ctx) { if (rf & 1) {
     const _r41 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 44);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 45);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NewrecipeComponent_button_78_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r41); const ctx_r40 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r40.deleteRecipe(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Delete Recipe");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -952,7 +960,7 @@ class NewrecipeComponent {
     }
 }
 NewrecipeComponent.ɵfac = function NewrecipeComponent_Factory(t) { return new (t || NewrecipeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_recipe_service__WEBPACK_IMPORTED_MODULE_6__["RecipeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_8__["AuthService"])); };
-NewrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NewrecipeComponent, selectors: [["app-newrecipe"]], decls: 80, vars: 22, consts: [[1, "row"], [1, "col-1"], [1, "col-11"], ["class", "page-text", 4, "ngIf"], [1, "col-2"], [1, "form-group"], ["for", "mealType", 1, "filter-label"], ["name", "mealType", "id", "mealType", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["for", "cuisineType", 1, "filter-label"], ["name", "cuisineType", "id", "cuisineType", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "featureType", 1, "filter-label"], ["name", "featureType", "id", "featureType", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "budget", 1, "filter-label"], ["name", "budget", "id", "budget", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "groupSize", 1, "filter-label"], ["name", "groupSize", "id", "groupSize", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "allergies", 1, "filter-label"], ["name", "allergies", "id", "allergies", "multiple", "multiple", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "name", 1, "subtitle-text"], ["type", "text", "name", "name", "id", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "steps", 1, "subtitle-text"], ["class", "container", 4, "ngFor", "ngForOf"], ["type", "button", 1, "btn", "btn-block", 3, "click"], ["for", "ingredients", 1, "subtitle-text"], [1, "subtitle-text"], ["type", "file", "accept", "image/*", 3, "change"], ["file", ""], [1, "row", "pic-row"], [1, "col"], ["class", "pic-holder", 3, "src", 4, "ngIf"], [4, "ngIf"], [1, "col", "text-center"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "submit new recipe", 3, "click", 4, "ngIf"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "update recipe", 3, "click", 4, "ngIf"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "delete recipe", 3, "click", 4, "ngIf"], [1, "page-text"], [3, "value"], [1, "container"], ["type", "text", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["type", "button", 1, "btn", "btn-danger", 3, "click"], [1, "pic-holder", 3, "src"], ["type", "submit", "title", "update recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"], ["type", "submit", "title", "submit new recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"], ["type", "submit", "title", "delete recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"]], template: function NewrecipeComponent_Template(rf, ctx) { if (rf & 1) {
+NewrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NewrecipeComponent, selectors: [["app-newrecipe"]], decls: 80, vars: 22, consts: [[1, "row"], [1, "col-1"], [1, "col-11"], ["class", "page-text", 4, "ngIf"], [1, "col-2"], [1, "form-group"], ["for", "mealType", 1, "filter-label"], ["name", "mealType", "id", "mealType", 1, "form-control", 3, "ngModel", "ngModelChange"], [3, "value", 4, "ngFor", "ngForOf"], ["for", "cuisineType", 1, "filter-label"], ["name", "cuisineType", "id", "cuisineType", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "featureType", 1, "filter-label"], ["name", "featureType", "id", "featureType", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "budget", 1, "filter-label"], ["name", "budget", "id", "budget", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "groupSize", 1, "filter-label"], ["name", "groupSize", "id", "groupSize", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "allergies", 1, "filter-label"], ["name", "allergies", "id", "allergies", "multiple", "multiple", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "name", 1, "subtitle-text"], ["type", "text", "name", "name", "id", "name", "required", "", 1, "form-control", 3, "ngModel", "ngModelChange"], ["for", "steps", 1, "subtitle-text"], ["class", "container", 4, "ngFor", "ngForOf"], ["type", "button", 1, "btn", "btn-block", 3, "click"], ["for", "ingredients", 1, "subtitle-text"], [1, "subtitle-text"], ["type", "file", "accept", "image/*", 3, "change"], ["file", ""], [1, "row", "pic-row"], [1, "col"], ["class", "pic-holder", 3, "src", 4, "ngIf"], [4, "ngIf"], [1, "col", "text-center"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "submit new recipe", 3, "click", 4, "ngIf"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "update recipe", 3, "click", 4, "ngIf"], ["type", "submit", "class", "btn btn-lg submit-btn submit-center", "title", "delete recipe", 3, "click", 4, "ngIf"], [1, "page-text"], [3, "value"], [1, "container"], ["type", "text", 1, "form-control", 3, "ngModel", "name", "ngModelChange"], ["type", "button", 1, "btn", "btn-danger", 3, "click"], [1, "pic-holder", 3, "src"], [1, "alert-label", "text-left", "warning"], ["type", "submit", "title", "update recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"], ["type", "submit", "title", "submit new recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"], ["type", "submit", "title", "delete recipe", 1, "btn", "btn-lg", "submit-btn", "submit-center", 3, "click"]], template: function NewrecipeComponent_Template(rf, ctx) { if (rf & 1) {
         const _r42 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "div", 1);
@@ -1069,7 +1077,7 @@ NewrecipeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](69, NewrecipeComponent_img_69_Template, 1, 1, "img", 30);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](70, NewrecipeComponent_div_70_Template, 4, 0, "div", 31);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](70, NewrecipeComponent_div_70_Template, 7, 1, "div", 31);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](71, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](72, "hr");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](73, "div", 0);
@@ -2554,7 +2562,7 @@ function OldrecipeComponent_div_6_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", item_r1.name, " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (item_r1.labelerrors == null ? null : item_r1.labelerrors.length) > 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", item_r1.labelerrors && item_r1.labelerrors[0].length > 0);
 } }
 class OldrecipeComponent {
     constructor(recipeService, authService) {
