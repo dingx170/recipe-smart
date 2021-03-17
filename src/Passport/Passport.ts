@@ -24,7 +24,7 @@ class Passport {
                 console.log("successfully authenticated user and returned to callback page.");
                 console.log("redirecting to /#/recipes");
                 console.log('Prining sso id from google in line 26: ' + googlePassportObj.ssoId);
-                res.redirect('/#/recipes');
+                res.redirect('/#/');
             } 
         );
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
@@ -50,7 +50,7 @@ class Passport {
         //console.log("req.cookies.user_sid: " + req.cookies.user_sid);
         if (req.isAuthenticated()) { console.log("user is authenticated"); return next(); }
         console.log("user is not authenticated");
-        res.redirect('/#/recipes');
+        res.redirect('/#/');
     }
 }
 

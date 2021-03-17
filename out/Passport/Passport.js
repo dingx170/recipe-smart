@@ -15,7 +15,7 @@ class Passport {
             console.log("successfully authenticated user and returned to callback page.");
             console.log("redirecting to /#/recipes");
             console.log('Prining sso id from google in line 26: ' + googlePassportObj.ssoId);
-            res.redirect('/#/recipes');
+            res.redirect('/#/');
         });
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
             // try get user id from google passport obj
@@ -37,7 +37,7 @@ class Passport {
             return next();
         }
         console.log("user is not authenticated");
-        res.redirect('/#/recipes');
+        res.redirect('/#/');
     }
 }
 exports.Passport = Passport;
