@@ -13,6 +13,7 @@ class Passport {
         
         recipeRoute.get('/auth/google', 
             passport.authenticate('google', {scope: ['profile', 'email']}));
+            // req.session.loginUser = ans.user_id;
 
 
         recipeRoute.get('/auth/google/callback', 
@@ -22,12 +23,15 @@ class Passport {
             (req, res) => {
                 console.log("successfully authenticated user and returned to callback page.");
                 console.log("redirecting to /#/recipes");
+                console.log('Prining sso id from google in line 26: ' + googlePassportObj.ssoId);
                 res.redirect('/#/recipes');
             } 
         );
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
             // try get user id from google passport obj
+            console.log('Now printing google sso id in line 32:' + googlePassportObj.ssoId);
             let ssoId = googlePassportObj.ssoId;
+            
         
             UserController.retrieveUserBySsoId(res, ssoId);
 

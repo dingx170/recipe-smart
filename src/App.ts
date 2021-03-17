@@ -63,7 +63,6 @@ class App {
         MyRecipeRoute.registerRoutes(router);
         UserRoute.registerRoutes(router);
         MealplanRoute.registerMealplanRoutes(router);
-
         Passport.registerRoutes(router, this.googlePassportObj);
 
         this.expApp.use('/', router);
