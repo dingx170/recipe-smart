@@ -9,8 +9,8 @@ describe('Test posting one recipe', function(){
     var responseBody;
 
     before(function (done) {
-        chai.request("http://localhost:8080")
-			.post("/myrecipes/123")
+        chai.request("http://recipesmart.azurewebsites.net")
+			.post("/api/myrecipes/11")
             .send({
                 name: 'testname',
                 member_id: 123,
