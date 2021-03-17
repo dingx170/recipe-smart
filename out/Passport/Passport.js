@@ -29,6 +29,14 @@ class Passport {
             logout();
             return res.redirect("/#/recipes");
         });
+        recipeRoute.get('/loggedIn', (req, res) => {
+            if (googlePassportObj.clientEmail != null && googlePassportObj.clientEmail != "") {
+                res.send(1);
+            }
+            else {
+                res.send(-1);
+            }
+        });
     }
     static validateAuth(req, res, next) {
         //console.log("req.cookies.user_sid: " + req.cookies.user_sid);
