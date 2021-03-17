@@ -30,9 +30,9 @@ class Passport {
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
             // try get user id from google passport obj
             let ssoId: any; 
-            if(req.session.usersssoId){
-                ssoId = req.session.loginUser;
-                console.log("existing req.session.loginUser = ", req.session.loginUser);
+            if(req.session.ssoId){
+                ssoId = req.session.ssoId;
+                console.log("existing req.session.ssoId = ", req.session.ssoId);
             } else {
                 // req.session.userssoId = googlePassportObj.ssoId;
                 // ssoId = req.session.userssoId;
@@ -42,8 +42,8 @@ class Passport {
                         return res.json({ret_code: 2, ret_msg: 'failed'});                
                     }
                     
-                    req.session.loginUser = googlePassportObj.ssoId;
-                    console.log("setting req.session.loginUser = ", req.session.loginUser);
+                    req.session.ssoId = googlePassportObj.ssoId;
+                    console.log("setting req.session.ssoId = ", req.session.ssoId);
                     res.json({ret_code: 0, ret_msg: 'success'});                           
                 });
                 ssoId = googlePassportObj.ssoId;
