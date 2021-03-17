@@ -36,6 +36,7 @@ class RecipeModel {
             unit_cost: Number,
             photo: String,
             likes: Number,
+            labelerrors: [String],
             meal_type: {
                 type: String,
                 enum: MealType_1.MealType,
