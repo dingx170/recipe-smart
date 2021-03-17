@@ -103,8 +103,8 @@ class MealplanController {
         let cuisine_type = req.query.cuisine_type; // == ||
         let feature_type = req.query.feature_type; // == ||
         let allergy_type = req.query.restrictions; // == !(||)
-        console.log(allergy_type[0] + "   allergy type..");
-        console.log(allergy_type[1] + "   allergy type..");
+        //console.log(allergy_type[0] + "   allergy type..");
+        //console.log(allergy_type[1] + "   allergy type..");
         var filter = {};
         filter['cost'] = { '$lte': budget };
         filter['group'] = group;
