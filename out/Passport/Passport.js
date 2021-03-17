@@ -19,8 +19,17 @@ class Passport {
         });
         recipeRoute.get('/auth/user', this.validateAuth, (req, res) => {
             // try get user id from google passport obj
-            console.log('Now printing google sso id in line 32:' + googlePassportObj.ssoId);
-            let ssoId = googlePassportObj.ssoId;
+            let ssoId;
+            if (req.session.usersssoId) {
+                ssoId = req.session.userssoId;
+            }
+            else {
+                req.session.userssoId = googlePassportObj.ssoId;
+                ssoId = req.session.userssoId;
+            }
+            // try get user id from google passport obj
+            //let ssoId = googlePassportObj.ssoId;
+            console.log("user SSO Id: " + ssoId);
             UserController_1.UserController.retrieveUserBySsoId(res, ssoId);
             // Will it still pass any result if directed to index page? No.
         });
