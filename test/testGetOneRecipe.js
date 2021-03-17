@@ -34,7 +34,7 @@ describe('Test getting one recipe', function(){
         expect(responseBody).to.have.deep.property('recipe_id');
         expect(responseBody).to.have.deep.property('name').that.is.a('string');
         expect(responseBody).to.have.deep.property('cost').that.is.a('number');
-        expect(responseBody).to.have.deep.property('restrictions').that.lengthOf(2);
+        expect(responseBody).to.have.deep.property('restrictions').that.lengthOf(4);
         expect(responseBody).to.have.deep.property('meal_type').that.is.a('string');
     });
 

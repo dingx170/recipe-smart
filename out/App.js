@@ -63,7 +63,7 @@ class App {
         this.expApp.use(passport_1.default.session());
         this.expApp.use(cors_1.default()); // TO-DO try delete
     }
-    // config front end 
+    // config front end  
     setupFrontEnd() {
         this.expApp.use('/', express_1.default.static(__dirname + '/dist/recipe-smart-client'));
     }

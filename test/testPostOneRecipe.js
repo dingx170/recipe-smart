@@ -4,9 +4,11 @@ var chaiHttp = require('chai-http')
 var expect = chai.expect;
 chai.use(chaiHttp);
 
+
 describe('Test posting one recipe', function(){
     var response;
     var responseBody;
+    //var recipeid;
 
     before(function (done) {
         chai.request("http://recipesmart.azurewebsites.net")
@@ -15,7 +17,7 @@ describe('Test posting one recipe', function(){
                 name: 'testname',
                 member_id: 123,
                 steps: [{step: 'test step 1'}],
-                ingredients: [{name: 'test ig', unit: 'test unit', count: 1}],
+                ingredients: [{name: 'test ig1', unit: 'test unit', count: 1}],
                 group: 1,
                 cost: 10,
                 unit_cost: 10,
@@ -24,6 +26,7 @@ describe('Test posting one recipe', function(){
 			.end(function (err, res) {
                 response = res;
                 responseBody = res.body;
+                //recipeid = responseBody.recipe_id;
                 expect(err).to.be.null;
                 expect(res).to.have.status(200);
 				done();
@@ -52,4 +55,10 @@ describe('Test posting one recipe', function(){
         expect(responseBody.unit_cost).to.equal(10);
         expect(responseBody.recipe_id).to.not.be.null;
     });
+    after(function(){
+        //console.log(recipeid);
+        chai.request("http://recipesmart.azurewebsites.net")
+        .delete("/api/myrecipes/11/"+responseBody.recipe_id)
+        .end();
+    })
 });
