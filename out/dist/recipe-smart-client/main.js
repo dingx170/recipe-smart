@@ -2256,6 +2256,8 @@ class LoginComponent {
         //   password: "test password"
         // };
         this.isLoggedIn = false;
+    }
+    ngOnInit() {
         this.authService.getStatus().subscribe(res => {
             console.log("/status:" + res);
             console.log("/status type:" + typeof (res));
@@ -2267,8 +2269,6 @@ class LoginComponent {
                 });
             }
         });
-    }
-    ngOnInit() {
     }
 }
 LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"])); };
