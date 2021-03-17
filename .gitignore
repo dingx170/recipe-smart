@@ -1,5 +1,4 @@
 /node_modules
 db/*
-/sessions
 .DS_Store
 dist/.DS_Store
