@@ -23,6 +23,7 @@ interface IRecipeModel extends Document {
     feature_type: FeatureType;
     restrictions: [AllergyType];
     recipe_tags: [RecipeTag];
+    labelerrors: [String];
 }
 
 export {IRecipeModel};
