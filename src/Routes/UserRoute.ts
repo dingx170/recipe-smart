@@ -7,10 +7,7 @@ class UserRoute{
 
     public static registerRoutes(userRoute: Router) {
 
-        // 2. get requests and pass to controller
         userRoute.get("/api/user/:id", UserController.retrieveUserByID);
-
-        // userRoute.get("/user/", UserController.retrieveUser);
         
         userRoute.post("/api/user", UserController.createUser);
 
