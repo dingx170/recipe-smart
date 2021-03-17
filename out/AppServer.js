@@ -7,6 +7,3 @@ const port = 8080; // default port to listen
 appServer.listen(process.env.PORT || port, () => {
     console.log("Server is running.");
 });
-// appServer.listen(port, () => {
-//     console.log("Server is running.");
-// });
