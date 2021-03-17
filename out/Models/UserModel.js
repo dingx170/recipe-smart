@@ -34,7 +34,6 @@ class UserModel {
         this.schema = new mongoose_1.Schema({
             user_id: Number,
             name: String,
-            password: String,
             email: String,
             photo: Buffer,
             ssoId: String,
