@@ -77,7 +77,7 @@ class RecipeModel {
     }
     static retrieveRecipesWithFilter(response, filter) {
         console.log(filter);
-        let query = this.model.find(filter);
+        let query = this.model.find(filter).limit(9);
         query.exec((err, item) => {
             response.json(item);
         });

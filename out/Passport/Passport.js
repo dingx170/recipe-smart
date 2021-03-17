@@ -37,7 +37,7 @@ class Passport {
             return next();
         }
         console.log("user is not authenticated");
-        res.redirect('../');
+        res.redirect('back');
     }
 }
 exports.Passport = Passport;
