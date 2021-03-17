@@ -3326,6 +3326,9 @@ const _c4 = function () { return ["./recipes"]; };
 class HeaderBaseComponent {
     constructor(authService) {
         this.authService = authService;
+        this.isLoggedIn = false;
+    }
+    ngOnInit() {
         this.authService.getStatus().subscribe(data => {
             console.log('=========================');
             console.log('data:' + JSON.stringify(data));
@@ -3337,8 +3340,6 @@ class HeaderBaseComponent {
                 this.isLoggedIn = false;
             }
         });
-    }
-    ngOnInit() {
     }
     static setLoginStatus(loginStatus) {
         //this.isLoggedIn = loginStatus;
