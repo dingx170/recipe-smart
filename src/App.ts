@@ -49,7 +49,7 @@ class App {
         this.expApp.use(cors()); // TO-DO try delete
     }
 
-    // config front end 
+    // config front end  
     private setupFrontEnd(): void {
         this.expApp.use('/', express.static(__dirname + '/dist/recipe-smart-client'));
     }
