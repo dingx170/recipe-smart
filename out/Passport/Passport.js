@@ -21,11 +21,21 @@ class Passport {
             // try get user id from google passport obj
             let ssoId;
             if (req.session.usersssoId) {
-                ssoId = req.session.userssoId;
+                ssoId = req.session.loginUser;
+                console.log("existing req.session.loginUser = ", req.session.loginUser);
             }
             else {
-                req.session.userssoId = googlePassportObj.ssoId;
-                ssoId = req.session.userssoId;
+                // req.session.userssoId = googlePassportObj.ssoId;
+                // ssoId = req.session.userssoId;
+                req.session.regenerate(function (err) {
+                    if (err) {
+                        return res.json({ ret_code: 2, ret_msg: 'failed' });
+                    }
+                    req.session.loginUser = googlePassportObj.ssoId;
+                    console.log("setting req.session.loginUser = ", req.session.loginUser);
+                    res.json({ ret_code: 0, ret_msg: 'success' });
+                });
+                ssoId = googlePassportObj.ssoId;
             }
             // try get user id from google passport obj
             //let ssoId = googlePassportObj.ssoId;
