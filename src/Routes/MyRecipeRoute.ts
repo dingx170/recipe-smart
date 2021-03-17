@@ -6,7 +6,7 @@ class MyRecipeRoute {
 
     public static registerRoutes(recipeRoute: Router) {
 
-        recipeRoute.get("/api/myrecipes/:member_id", Passport.validateAuth, RecipeController.getRecipesByMemberID);
+        recipeRoute.get("/api/myrecipes/:member_id", RecipeController.getRecipesByMemberID);
         
         recipeRoute.post("/api/myrecipes/:member_id", RecipeController.postRecipeByMemberID);
 
