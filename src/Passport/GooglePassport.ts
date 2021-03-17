@@ -13,6 +13,7 @@ class GooglePassport {
     secretId: string;
     displayName: string;
     ssoId: string;
+    clientEmail: string;
      
     constructor() { 
         this.clientId = googleAppAuth.id;
@@ -21,8 +22,8 @@ class GooglePassport {
         passport.use(new GoogleStrategy({
                 clientID: this.clientId,
                 clientSecret: this.secretId,
-                callbackURL: "/auth/google/callback"
-//                profileFields: ['id', 'displayName', 'emails']
+                callbackURL: "/auth/google/callback",
+                profileFields: ['id', 'displayName', 'emails']
             },
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
@@ -31,16 +32,16 @@ class GooglePassport {
                     console.log('validating google profile:' + JSON.stringify(profile));
                     console.log("userId:" + profile.id);
                     console.log("displayName: " + profile.displayName);
+                    console.log("emails: " + profile.emails[0].value);
                     console.log("retrieve all of the profile info needed");
 
                     console.log("+++++++++++++++++++");
                     this.ssoId = profile.id;
                     this.displayName = profile.displayName;
-
-                    // let userModel = UserController.userModel.getModel();
+                    this.clientEmail = profile.emails[0].value;
 
                     let user :any = await UserController.userModel.validateUserBySsoId(profile.id);
-                    console.log(user);
+                    console.log('user existing: ' + user);
 
                     if (user) {
                         console.log("existing user");
@@ -50,7 +51,8 @@ class GooglePassport {
                         console.log("create user");
                         let newUser : any = {
                             name : profile.displayName,
-                            ssoId : profile.id
+                            ssoId : profile.id,
+                            email : profile.emails[0].value
                         }
                         UserController.userModel.addUserThruSSO(newUser, (res) => {
                             console.log(res);

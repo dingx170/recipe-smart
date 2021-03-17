@@ -4,13 +4,15 @@ import { UserController } from "../Controllers/UserController";
 import GooglePassport from "./GooglePassport";
 import GooglePassportObj from './GooglePassport';
 
+let logout = require('express-passport-logout');
 class Passport {
+
 
     public static registerRoutes(recipeRoute: Router, googlePassportObj: GooglePassportObj) {
 
         
         recipeRoute.get('/auth/google', 
-            passport.authenticate('google', {scope: ['profile']}));
+            passport.authenticate('google', {scope: ['profile', 'email']}));
 
 
         recipeRoute.get('/auth/google/callback', 
@@ -30,6 +32,12 @@ class Passport {
             UserController.retrieveUserBySsoId(res, ssoId);
 
             // Will it still pass any result if directed to index page? No.
+        });
+
+        recipeRoute.get('/logout', (req, res) =>{
+            // googlePassportObj.clientEmail = "";
+            logout();
+            return res.redirect("/#/recipes");
         })
 
 
