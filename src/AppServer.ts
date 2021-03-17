@@ -9,6 +9,3 @@ appServer.listen(process.env.PORT || port, () => {
     console.log("Server is running.");
 });
 
-// appServer.listen(port, () => {
-//     console.log("Server is running.");
-// });

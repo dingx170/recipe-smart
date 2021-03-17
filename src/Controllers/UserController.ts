@@ -100,23 +100,12 @@ class UserController{
         
         UserController.userModel.validateNameEmail(name, email, res);
         console.log("executed validation for name and email");
-        
-
     }
 
     
     public static retrieveUserBySsoId(res: Response, ssoId: string){
         this.userModel.getUserBySsoId(ssoId, res);
     }
-    // public static retrieveUser(req : Request, res : Response){
-    //     let filter = req.query.body;
-    
-    //     UserController.userModel.retrieveUser(res, {filter});
-
-    //     console.log("executed retrieve user by condition");
-    // }
-
-
 
 }
 export {UserController}

@@ -28,14 +28,7 @@ class GooglePassport {
             (accessToken, refreshToken, profile, done) => {
                 console.log("inside new password google strategy");
                 process.nextTick( async () => {
-                    console.log("==============================================");
-                    console.log('validating google profile:' + JSON.stringify(profile));
-                    console.log("userId:" + profile.id);
-                    console.log("displayName: " + profile.displayName);
-                    console.log("emails: " + profile.emails[0].value);
-                    console.log("retrieve all of the profile info needed");
 
-                    console.log("+++++++++++++++++++");
                     this.ssoId = profile.id;
                     this.displayName = profile.displayName;
                     this.clientEmail = profile.emails[0].value;
@@ -45,7 +38,6 @@ class GooglePassport {
 
                     if (user) {
                         console.log("existing user");
-                        // this.userId = user.user_id;
                         done(null, user);
                     } else {
                         console.log("create user");
@@ -58,9 +50,6 @@ class GooglePassport {
                             console.log(res);
                         });
                     }
-                    console.log("+++++++++++++++++++");
-                    console.log("==============================================");
-                    // this.email = profile.emails[0].value;
                     return done(null, profile);
                 }); 
             }
