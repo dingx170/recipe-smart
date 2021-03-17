@@ -24,8 +24,8 @@ class GooglePassport {
         passport.use(new GoogleStrategy({
             clientID: this.clientId,
             clientSecret: this.secretId,
-            callbackURL: "/auth/google/callback"
-            //                profileFields: ['id', 'displayName', 'emails']
+            callbackURL: "/auth/google/callback",
+            profileFields: ['id', 'displayName', 'emails']
         }, (accessToken, refreshToken, profile, done) => {
             console.log("inside new password google strategy");
             process.nextTick(() => __awaiter(this, void 0, void 0, function* () {
@@ -33,13 +33,14 @@ class GooglePassport {
                 console.log('validating google profile:' + JSON.stringify(profile));
                 console.log("userId:" + profile.id);
                 console.log("displayName: " + profile.displayName);
+                console.log("emails: " + profile.emails[0].value);
                 console.log("retrieve all of the profile info needed");
                 console.log("+++++++++++++++++++");
                 this.ssoId = profile.id;
                 this.displayName = profile.displayName;
-                // let userModel = UserController.userModel.getModel();
+                this.clientEmail = profile.emails[0].value;
                 let user = yield UserController_1.UserController.userModel.validateUserBySsoId(profile.id);
-                console.log(user);
+                console.log('user existing: ' + user);
                 if (user) {
                     console.log("existing user");
                     // this.userId = user.user_id;
@@ -49,7 +50,8 @@ class GooglePassport {
                     console.log("create user");
                     let newUser = {
                         name: profile.displayName,
-                        ssoId: profile.id
+                        ssoId: profile.id,
+                        email: profile.emails[0].value
                     };
                     UserController_1.UserController.userModel.addUserThruSSO(newUser, (res) => {
                         console.log(res);
