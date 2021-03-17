@@ -3327,6 +3327,9 @@ class HeaderBaseComponent {
     constructor(authService) {
         this.authService = authService;
         this.authService.getStatus().subscribe(data => {
+            console.log('=========================');
+            console.log('data:' + JSON.stringify(data));
+            console.log('=========================');
             if (data == 1) {
                 this.isLoggedIn = true;
             }
